@@ -1,0 +1,11 @@
+\begin{example}
+%	$\mathcal{A} = \left\langle Q, \rightarrow, C, q_{0}\right\rangle$ is the automata represented in Fig. \ref{moveCA} where $Q = \{q_E,q_W\}$ and $C = \{west,east,stay_{lon}\} $. The set of variables for the constraint automaton $\mathcal{A}$ is $\mathcal{V} = \cup_{c \in C} V_c$. Each state $q \in Q$ contains a set of value assignment for each variable $v \in \mathcal{V}$ called \textit{context}. Thus, a transition is activated if its constraint is satisfiable in the context of its pre state's. Note that it is possible that the context in a state satisfies multiple constraints. In this case, the choice of the transition is non-deterministic.
+The automaton represents the behavior of a system oscillating between east and west non deterministically. From state $q_W$, three actions are possible : $west, stay_{lon} $ and $east$. If all three actions are allowed (their evaluation is true), then the choice is non deterministic. If the evaluation defines a subset $c \subset C$ of true predicate, the action is chosen non deterministically over this subset $c$. Constraint automata does not let us to express an order among the constraint of a subset $c \subset C$. One possible behavior of this automaton can be described by the infinite stream of constraints $\langle east,west,stay_{lon},stay_{lon},east,west \rangle ^{\omega}$
+
+	\begin{figure}[H]
+		\centering
+		\resizebox{8cm}{!}{\input{fig/moveCA.tikz}}
+		\caption{Constraint automata of a moving agent}
+		\label{moveCA}
+	\end{figure}
+\end{example}

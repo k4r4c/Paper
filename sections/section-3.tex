@@ -1,0 +1,103 @@
+\section{Example}
+
+\begin{example}Movement components\\
+\begin{figure}[H]
+	\centering
+	\resizebox{8cm}{!}{\input{fig/moveSCA.tikz}}
+	\caption{Soft constraint automata for moving}\label{fig:myfigure}
+\end{figure}
+
+\begin{align*}
+\phi = &(west \otimes 0 \otimes q=q_W) \oplus (stay_{lon} \otimes q=q_W \otimes 5) \oplus (east \otimes 5 \otimes q=q_W \otimes q'=q_E) \oplus (east \otimes 0 \otimes q=q_E) \oplus \\
+		&(stay_{lon} \otimes q=q_E \otimes 5) \oplus (west \otimes 5 \otimes q=q_E \otimes q'=q_W)
+\end{align*}
+
+\begin{figure}[H]
+	\centering
+	\resizebox{7cm}{!}{\input{fig/north-south.tikz}}
+	\caption{Soft constraint automata for diverging}\label{fig:myfigure}
+\end{figure}
+\end{example}
+
+\begin{align*}
+\phi = 
+\end{align*}
+
+\begin{example}Energy management component\\
+\begin{figure}[H]
+	\centering
+	\resizebox{12cm}{!}{\input{fig/charge.tikz}}
+	\caption{Soft constraint automata for energy management}\label{fig:myfigure}
+\end{figure}
+We denote the current state as a variable s. In the state $q_i$, the variable is of value $i$. 
+We consider the set of constraint $C = \{charge, discharge_1, discharge_2\}$. The following formula $\Phi$ describes the behavior of the SCA of Figure 1.
+\begin{align*}
+\Phi =  & \quad charge \land s = 0 \land s'= 1 \land 0_\mathbb{W} \lor \\ 
+& \quad charge \land s = 1 \land s'= 2 \land 0_\mathbb{W} \lor \\ 
+& \quad charge \land s = 2 \land s'= 3 \land 0_\mathbb{W} \lor \\ 
+& \quad charge \land s = 3 \land s'= 4 \land 0_\mathbb{W} \lor \\ & \quad discharge_{1} \land s = 4 \land s = 3 \land 2_\mathbb{W} \lor \\
+& \quad discharge_{1} \land s = 3 \land s = 2 \land 2_\mathbb{W} \lor \\
+& \quad discharge_{1} \land s = 2 \land s = 1 \land 2_\mathbb{W} \lor \\
+& \quad discharge_{1} \land s = 1 \land s = 0 \land 2_\mathbb{W} \lor \\
+& \quad discharge_{2} \land s = 4 \land s = 2 \land 5_\mathbb{W} \lor \\
+& \quad discharge_{2} \land s = 3 \land s = 1 \land 5_\mathbb{W} \lor \\
+& \quad discharge_{2} \land s = 2 \land s = 0 \land 5_\mathbb{W} \\
+	= & \quad \bigvee_i \Phi_i
+\end{align*}
+
+The SCA of figure 1 uses the weighted c-semiring to express its preferences. In addition, we use the boolean c-semiring to represent the constraint as a c-semiring value. In order to show that the behavior of a SCA can be expressed by the formula $\Phi$, given a context $c$, we represent the formula with the following table :
+$$
+\begin{array}{l|cr}
+& \mathbb{B} & \mathbb{W}\\
+\hline
+\Phi_1 & \quad \llbracket charge \land s = 0 \land s'= 1 \rrbracket_{c}  \quad & \quad 0_\mathbb{W} \\
+\Phi_2 & \quad \llbracket charge \land s = 1 \land s'= 2 \rrbracket_{c} \quad & \quad 0_\mathbb{W} \\
+\Phi_3 & \quad \llbracket charge \land s = 2 \land s'= 3 \rrbracket_{c} \quad & \quad 0_\mathbb{W} \\
+\Phi_4 & \quad \llbracket charge \land s = 3 \land s'= 4 \rrbracket_{c} \quad & \quad 0_\mathbb{W} \\
+\Phi_5 & \quad \llbracket discharge_{1} \land s = 3 \land s = 2 \rrbracket_{c} \quad & \quad 2_\mathbb{W} \\
+\Phi_6 & \quad \llbracket discharge_{1} \land s = 2 \land s = 1 \rrbracket_{c} \quad & \quad 2_\mathbb{W} \\
+\Phi_7 & \quad \llbracket discharge_{1} \land s = 1 \land s = 0 \rrbracket_{c} \quad & \quad 2_\mathbb{W} \\
+\Phi_8 & \quad \llbracket discharge_{2} \land s = 4 \land s = 2 \rrbracket_{c} \quad & \quad 5_\mathbb{W} \\
+\Phi_9 & \quad \llbracket discharge_{2} \land s = 3 \land s = 1 \rrbracket_{c} \quad & \quad 5_\mathbb{W} \\
+\Phi_{10} & \quad \llbracket discharge_{2} \land s = 2 \land s = 0 \rrbracket_{c} \quad & \quad 5_\mathbb{W} \\
+\end{array} 
+$$
+where $\llbracket \phi \rrbracket_{c} = \top$ if, given the context c and the free variable of $\phi$, the formula can be made true.
+, the evaluation process first looks at the evaluation Starting by the initial context $c=\{s=4\}$, if 
+
+\begin{figure}[H]
+	\centering
+	\resizebox{6cm}{!}{\input{fig/snapshot.tikz}}
+	\caption{Soft constraint automaton modeling movement and snapshot}\label{fig:myfigure}
+\end{figure}
+Taking the variable m to represent the state of the SCA in figure 2, a corresponding formula modeling the behavior is :
+\begin{align*}
+\Psi =  & \quad move \land m = 0 \land m'= 0 \land 2_\mathbb{W} \lor \\ 
+& \quad pass \land m = 0 \land m'= 0 \land 0_\mathbb{W} \lor \\ 
+& \quad snapshot \land m = 0 \land m'= 1 \land 0_\mathbb{W} \lor \\ 
+& \quad move \land m = 1 \land m' = 0 \land 0_\mathbb{W} \lor \\ 
+& \quad pass \land m = 1 \land m' = 1 \land 2_\mathbb{W} \\
+ = & \quad \bigvee_i \Psi_i \\
+\end{align*}
+\end{example}
+$$
+\begin{array}{l|cr}
+& \mathbb{B} & \mathbb{W}\\
+\hline
+\Psi_1 & \quad \llbracket move \land m = 0 \land m'= 0 \rrbracket_{c}  \quad & \quad 2_\mathbb{W} \\
+\Psi_2 & \quad \llbracket pass \land m = 0 \land m'= 0 \rrbracket_{c} \quad & \quad 0_\mathbb{W} \\
+\Psi_3 & \quad \llbracket snapshot \land m = 0 \land m'= 1 \rrbracket_{c} \quad & \quad 0_\mathbb{W} \\
+\Psi_4 & \quad \llbracket move \land m = 1 \land m'= 0 \rrbracket_{c} \quad & \quad 0_\mathbb{W} \\
+\Psi_5 & \quad \llbracket pass \land m = 1 \land m' = 1 \rrbracket_{c} \quad & \quad 2_\mathbb{W} 
+\end{array} 
+$$
+
+The composed SCA is defined as follow :
+\begin{align*}
+\Psi =  & \quad move \land m = 0 \land m'= 0 \land 2_\mathbb{W} \lor \\ 
+& \quad pass \land m = 0 \land m'= 0 \land 0_\mathbb{W} \lor \\ 
+& \quad snapshot \land m = 0 \land m'= 1 \land 0_\mathbb{W} \lor \\ 
+& \quad move \land m = 1 \land m' = 0 \land 0_\mathbb{W} \lor \\ 
+& \quad pass \land m = 1 \land m' = 1 \land 2_\mathbb{W} \\
+= & \quad \bigvee_i \Psi_i \\
+\end{align*}

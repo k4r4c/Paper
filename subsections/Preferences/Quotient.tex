@@ -1,0 +1,26 @@
+We are interested in quotients of $E \otimes_{\mathbb{B}} F$ as definition of different products of csemiring.
+
+\begin{definition}(lexicographic) A quotient $h: E \otimes_{\mathbb{B}} F \rightarrow L$ is lexicographic if and only if, for all $e_1,e_2 \in E$ and $f_1,f_2 \in F$, there exists $i \in \{1,0\}$, such that we have:
+	$$h(e_1 \times f_1 + e_2 \times f_2)= h(e_i \times f_i)$$
+	whenever $e_1+e_2=e_i$ and $e_1 \not = e_2$; or $f_1 + f_2 = f_i$ and $e_1=e_2$
+\end{definition}
+\noindent
+\begin{definition}
+	(collapsing elements) We define the set of collapsing element of a semiring E by $$\mathcal{C}(E) = \{e \in E \quad | \quad \exists e_1 e_2 \in E, \quad e_1 \times e = e_2 \times e \land e_1 \not = e_2  \}$$
+\end{definition}
+In other words, it is possible to break a strict inequality after multiplication with a collapsing element. Collapsing element does not preserve strict inequality. Therefore, in the case of some product semiring (for instance lexicographic), distribution of $\times$ over + does not hold. When we come to define product, we should be aware of collapsing element in order to get back a csemiring. \\
+
+Example : E, F csemirings. $e,e_1,e_2 \in E$ such that $e_1 \times e = e_2 \times e \land e_1 < e_2$ and $f_1,f_2 \in F$ with $f_2<f_1 $. We look at a possible element of the coproduct : $e_1 \times f_1 + e_2 \times f_2$. Assuming we have a quotient, and $h : E \sqcup F \rightarrow E \times_l F$ can project this term in a lexicographic product space, we would get $h(e_1 \times f_1 + e_2 \times f_2) = (e_2,f_2)$. By distributivity law, and given the homomorphic properties of h, we have :
+\begin{align*}
+	&h(e \times (e_1 \times f_1 + e_2 \times f_2)) = h(e \times e_1 \times f_1 + e \times e_2 \times f_2) = h(e \times e_2 \times f_1) \quad \\ \text{and} \\
+	 &h(e) \times h(e_1 \times f_1 + e_2 \times f_2) = h(e) \times h( e_2 \times f_2) = h(e \times e_2 \times f_2) \\ \text{Thus} \\
+	 & h(e \times (e_1 \times f_1 + e_2 \times f_2)) \not= h(e) \times h(e_1 \times f_1 + e_2 \times f_2)
+\end{align*}
+
+\begin{lemma}
+	If E is cancellative, then there exists a lexicographic quotient $h : E \otimes_{\mathbb{B}} F \rightarrow L$
+	%a relation $\equiv$ on $E \otimes_{\mathbb{B}} F$ such that for all $e_1,e_2 \in E$, $f_1,f_2 \in F$, there exists $i \in \{1,0\}$, such that we have :$$e_1 \times f_1 + e_2 \times f_2 \equiv e_i \times f_i$$ 	whenever $e_1+e_2=e_i$ and $e_1 \not = e_2$; or $f_1 + f_2 = f_i$ and $e_1=e_2$
+\end{lemma}
+%\begin{lemma}
+%	The boolean csemiring is lexicographic
+%\end{lemma}

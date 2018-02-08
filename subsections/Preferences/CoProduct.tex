@@ -1,0 +1,86 @@
+%\begin{definition}
+%	C-semiring are R-algebra where R is the unital ring.
+%\end{definition}
+
+%The co-product of two csemiring E and F consists in the disjoint union of the elements of E, F and the tensor product $E \otimes_{\mathbb{B}} F$ over the Boolean semiring.
+%\begin{definition}
+%	The co-product $E \sqcup F$ of two c-semirings $E$ and $F$ is defined by 
+%	$E \oplus F \oplus E \otimes_{\mathbb{B}} F$
+%	modulo the equations $x + 1 = 1$ and $x \otimes 0 = 0$, for all x $\in E\sqcup F$.
+%\end{definition}
+% We note $\lfloor \cdot \rfloor : E \rightarrow E \sqcup F$ for the right injection and $\lceil \cdot \rceil : F \rightarrow E \sqcup F$ for the left injection.
+\begin{theorem}
+	Let E and F be csemiring. Then, given any csemiring G and maps $e : E \rightarrow G $ and $f : F \rightarrow G $, there exists a unique map $g : E \sqcup F \rightarrow G $ such that $g \circ \lfloor \cdot \rfloor  = e$ and $g \circ \lceil \cdot \rceil = f$
+\end{theorem}
+
+\begin{proof}
+	By universal property of the co-product, there exists a unique map $g:E\sqcup F \rightarrow G$ such that the following diagram commutes:
+	\begin{figure}[H]
+		\centering
+		\resizebox{8cm}{!}{\input{fig/coprod.tikz}}
+		\caption{Coproduct universal property}
+		\label{coprod}
+	\end{figure}
+\end{proof}
+
+\begin{lemma}
+	Given E a csemiring, there exists a map $g : E \sqcup E \rightarrow E$.
+\end{lemma}
+\begin{proof}
+	property of the co-product.
+\end{proof}
+
+%\noindent
+%\textbf{Properties of composition} 
+
+\noindent
+\textbf{collapsing element and coproduct} We define the set of collapsing element of a semiring E by $$\mathcal{C}(E) = \{e \in E \quad | \quad \exists e_1 e_2 \in E, \quad e_1 \times e = e_2 \times e \land e_1 < e_2  \}$$
+In other words, it is possible to break a strict inequality after multiplication with a collapsing element. Collapsing element does not preserve strict inequality. Therefore, in the case of some product semiring (for instance lexicographic), distribution of $\times$ over + does not hold. When we come to define product, we should be aware of collapsing element in order to get back a csemiring. \\
+
+Example : E, F csemirings. $e,e_1,e_2 \in E$ such that $e_1 \times e = e_2 \times e \land e_1 < e_2$ and $f_1,f_2 \in F$ with $f_2<f_1 $. We look at a possible element of the coproduct : $e_1 \otimes f_1 \oplus e_2 \otimes f_2$. Assuming we have a quotient, and $h : E \sqcup F \rightarrow E \times_l F$ can project this term in a lexicographic product space, we would get $h(e_1 \otimes f_1 \oplus e_2 \otimes f_2) = (e_2,f_2)$. However, now we would have the following :
+$$
+h(e \otimes e_1 \otimes f_1 \oplus e \otimes e_2 \otimes f_2) = (e \otimes_E e_2,f_1)  \not= (e \otimes_E e_2,f_2) = (e,1)\otimes_l (e_2,f_2) = h(e) \otimes_l h(e_1\otimes f1 \oplus e_2 \otimes f_2)
+$$
+
+%For the following definition, we restrict the carrier of a csemiring to its non-cancellative elements if we want the product to be a csemiring.
+
+%We want to be able to define the following. Let E, F and C be three csemirings and $f: E \rightarrow C$, $g : F \rightarrow C $
+
+%\begin{definition}
+%	E and F csemirings, the co-product $E \sqcup F$ is defined by $E \oplus F \oplus E \otimes_{\mathbb{N}} F$ modulo $x \oplus 1 = 1 $ and $x \otimes 0 = 0 $.
+%	\begin{list}{-}{ }
+%		\item $x \oplus 1 = 1 $
+%		\item $x \otimes 0 = 0 $
+%	\end{list}
+%\end{definition}
+
+%\begin{definition}
+%Given E and F csemirings, let $i_e : E \rightarrow E \otimes_{B} F$ and $i_f : F \rightarrow E \otimes_{B} F$ we define the co-product $E \otimes_{B} F$ where $B=\{0,1\}$ (since + is idempotent).
+%\end{definition}
+
+
+%\begin{definition}
+%The co-product $\mathbb{E} \sqcup \mathbb{F}$ of two c-semirings $\mathbb{E}$ and $\mathbb{F}$ is defined by 
+%$\mathbb{B} \oplus \mathbb{E} \oplus \mathbb{F} \oplus \mathbb{E} \otimes_{\mathbb{B}} \mathbb{F}$
+%$\mathbb{E} \otimes_{\mathbb{B}} \mathbb{F}$
+%, where $ \mathbb{B}$ is the boolean c-semiring.
+%modulo the equations $x + 1 = 1$ and $x \otimes 0 = 0$, for all x $\in \mathbb{E}\sqcup \mathbb{F}$.
+%\end{definition}
+
+\begin{definition}Let $\mathbb{E}$ and $\mathbb{F}$ be two c-semirings. Their composition written $\mathbb{E} \sqcup \mathbb{F} = \left\langle \mathbb{E} \sqcup \mathbb{F}, +, \times, \boldmath{1},\boldmath{0} \right\rangle$ is defined as :
+	\begin{list}{-}{}
+		\item The carrier is given by the co-product $\mathbb{E} \sqcup \mathbb{F}$, and we write $\lfloor \cdot \rfloor : \mathbb{E} \rightarrow \mathbb{E} \sqcup \mathbb{F}$ and $\lceil \cdot \rceil : \mathbb{F} \rightarrow \mathbb{E} \sqcup \mathbb{F}$ the left and right injections.
+		\item The choice operator $+ : 2^{\mathbb{E} \sqcup \mathbb{F}} \rightarrow \mathbb{E} \sqcup \mathbb{F}$, where, given $e_1,e_2 \in \mathbb{E}$ and $s_1,s_2 \in \mathbb{F}$: : 
+		\begin{align*}
+			& \lceil e_1 \rceil + \lceil e_2 \rceil = \lceil e_1 + e_2 \rceil \\
+			& \lfloor s_1 \rfloor + \lfloor s_2 \rfloor = \lfloor s_1 + s_2 \rfloor  %\\
+			%			& \lfloor s_1 \rfloor \times \lceil e_1 \rceil + \lfloor s_2 \rfloor \times \lceil e_2 \rceil = \lfloor s_1 + s_2 \rfloor \times \lceil e_1 +e_2 \rceil
+		\end{align*}
+		\item The composition operator $\times : \mathbb{E} \sqcup \mathbb{F} \times \mathbb{E} \sqcup \mathbb{F} \rightarrow \mathbb{E} \sqcup \mathbb{F}$, where, given $e_1,e_2 \in \mathbb{E}$ and $s_1,s_2 \in \mathbb{F}$:
+		\begin{align*}
+			& \lceil e_1 \rceil \times \lceil e_2 \rceil = \lceil e_1 \times e_2 \rceil \\
+			& \lfloor s_1 \rfloor \times \lfloor s_2 \rfloor = \lfloor s_1 \times s_2 \rfloor 
+		\end{align*}
+		\item $\textbf{0}_{\mathbb{E} \sqcup \mathbb{F}}=\lceil\textbf{0}_{\mathbb{E}}\rceil=\lfloor\textbf{0}_{\mathbb{F}}\rfloor$ and $\textbf{1}_{\mathbb{E} \sqcup \mathbb{F}}=\lceil\textbf{1}_{\mathbb{E}}\rceil=\lfloor\textbf{1}_{\mathbb{F}}\rfloor$
+	\end{list}
+\end{definition}

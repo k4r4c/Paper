@@ -1,0 +1,97 @@
+\section{Semiring Automata}
+We start by reminding some notion linked to Constraint Automata. An intuitive view of how a CA could be executed is as follow. A Constraint Automata involves a set of variable $V$. Each state of the Constraint Automata is a particular set of variable's assignment. The assignment needs not to be complete (ie, some variable could still be free). From the state, a set of outgoing transitions is defined. A transition involves a constraint, represented by a boolean predicate over a subset of the system's variables. If all the variables involved in the predicate are defined, the formula is evaluated to $true$ or $false$. If some variables are not defined, the assignment is made non deterministically, and the predicate is evaluated.
+
+The language of constraint extends the language of first order logic by adding a constant symbol $*$. When this symbol is assigned to a variable, it means that the variable is now free (removed from the context). 
+\begin{definition} (Language of constraint) A term is defined as :
+	$$ t := \quad v \quad | \quad f(t_1, ..., t_n) \quad | \quad * $$
+We note V the set of all variables, and D the data domain of the variables.
+\end{definition}
+The language is sufficient to build predicate and to define constraints. Constraint are evaluated given a certain context. We note $\phi$ the constraint, $p: v \rightarrow 2$ the context, $\llbracket \cdot \rrbracket_{\cdot} : f \rightarrow (v \rightarrow 2)$ the interpretation operator, and $\llbracket \phi \rrbracket_{p} : 2$ a valuation of the constraint.
+ Thus, constraint automata can be introduced following the definition.
+\begin{definition}
+	Constraint Automata is a tuple $\left\langle Q, \rightarrow, C, q_{0}, \right\rangle$ where : 
+	\begin{list}{-}{ }
+		\item $\mathbb{Q}$ is a set of state and $q_0\in$ Q is the initial state.
+		\item C is a set of constraints, where a constraint is a predicate $P: (V \rightarrow D) \rightarrow \{\top,\bot\}$.
+		\item $\rightarrow \subseteq Q \times C \times Q$ is a finite relation called transition relation.
+		%A transition is denoted by $\left\langle q_i, c, s, p_i \right\rangle \in \rightarrow$
+	\end{list}
+\end{definition}
+From the fact that a constraint is not necessarily closed, the name of $action$ could also be used. A transition that is taken by the system not only returns a boolean value regarding its predicate, but also assigns value to its free variable.
+\begin{example}For this example, we look at a constraint automaton modeling a longitudinal movement. $Q=\{q_{W},q_\{E\}\} $ is the set of states and $C=\{west,east,stay_{lon}\} $ is the set of constraint predicate. In this example, we do not represent explicitly the variables involved in the constraint; but, for an executional reasoning, the context and variable should be represented.\\
+	\begin{figure}[H]
+		\centering
+		\resizebox{8cm}{!}{\input{fig/moveCA.tikz}}
+		\caption{Soft constraint automata for moving}\label{fig:myfigure}
+	\end{figure}
+\end{example}
+The automaton represents the behavior of a system oscillating between east and west non deterministically. From state $q_W$, three actions are possible : $west, stay_{lon} $ and $east$. If all three actions are allowed (their evaluation is true), then the choice is non deterministic. If the evaluation defines a subset $c \subset C$ of true predicate, the action is chosen non deterministically over this subset $c$. Constraint automata does not let us to express an order among the constraint of a subset $c \subset C$.
+\begin{definition}
+	Soft Constraint Automata is a tuple $\left\langle Q, \rightarrow, C, \mathbb{S}, q_{0}, \right\rangle$ where : 
+	\begin{list}{-}{ }
+		\item $Q$ is a set of state and $q_0\in$ Q is the initial state.
+		\item C is a set of semiring predicate, where a semiring predicate is of the shape $P_{\mathbb{S}} : (V \rightarrow D) \rightarrow \mathbb{S} $ and $\mathbb{S}$ is a c-semiring.
+		\item $\rightarrow \subseteq Q \times C \times Q$ is a finite relation called transition relation. 
+		%A transition is denoted by $\left\langle q_i, c, s, p_i \right\rangle \in \rightarrow$
+	\end{list}
+\end{definition}
+
+Note that in the case where $\mathbb{B} = \left \langle \{\top,\bot\}, \land, \lor, 1_{\mathbb{B}}, 0_{\mathbb{B}} \right \rangle$ is the boolean semiring, the Soft Constraint Automata $\left\langle Q, \rightarrow, C, \mathbb{B}, q_{0} \right\rangle$ is equivalent to the Constraint Automata $\left\langle Q, \rightarrow, C, q_{0}\right\rangle$.
+
+Question : how to compose semiring predicates ?
+
+The definition slightly changes from Bistarelli. In this definition, each transition involves a unique semiring value. In other words, the semiring value is independent of the assignment of variable in the constraint involved in the transition. If someone wants to give two different semiring values for two different assignments, it is necessary to write two separated transitions.\\
+Tobias defined a Component Action System as an underlying structure for composition of SCA's actions. In this section, we present a different semantic where a composed action is a logical conjunction of constraint, and whether this new conjunct is satisfiable or not is separated from composition.
+
+%In this paper, we claim that an action can be represented as a port in composition with a more sophisticated automaton. More precisely, an action of a Soft Component Automaton can be abstracted to a synchronization point over multiple ports. Intuitively, performing an action results into activation of several ports involved in the action, and a consistent data assignment to variable involved in the action. An action could be written as a constraint over variable, and performing an action is a data assignment such that the constraint is true. We define actions as relation among terms.
+
+%A Soft Component Automata is the composition of Soft Constraint Automata with a Component Action System defined as a Soft Constraint Automata.
+
+\begin{definition}
+	Given the language of constraint and a c-semiring $\mathbb{E} $, the syntax of a semiring formula $\phi$ is as follows :
+	$$ 
+		\phi := \quad e \quad | \quad \phi_1 \otimes \phi_2 \quad | \quad \phi_1 \oplus \phi_2 \quad | \quad R(t_1,...,t_n) \quad | \quad \exists x \phi \quad | \quad t_1 = t_2 
+	$$
+	where $e \in \mathbb{E}$
+\end{definition}
+Absorbing element for $\otimes$ and $\oplus$ is lifted to the free product, ie $0 = 0_{\mathbb{E}_1}= 0_{\mathbb{E}_2}$ and $1 = 1_{\mathbb{E}_1}= 1_{\mathbb{E}_2}$. Each element of the same c-semiring composes in the free product : is $e_1,e_2 \in \mathbb{E}$,  $e_1 \otimes e_2= e_1 \otimes_{\mathbb{E}}e_2$. Otherwise, we form the tuple of $(e1,e2)$.
+
+%A boolean formula corresponds to a semiring formula with a Boolean semiring.
+
+The set that contains all different c-semiring names involved in $\phi$ is called the \textit{atomic c-semirings}.
+\begin{example}
+	The example uses two c-semirings, $energy$ with the underlying weighted semiring and $\mathbb{B}$ the boolean c-semiring. We write the following formula :
+	\begin{align*}
+		\phi = (x=1) \otimes 5_{\mathbb{W}}
+	\end{align*}
+	where $x=1 \in \mathbb{B}$ and $5_{\mathbb{W}} \in energy$.
+	The set $S$ of atomic c-semiring names of $\phi$ is $\{\mathbb{B},energy\}$.
+\end{example}
+
+
+%\begin{definition}
+%	A c-semiring evaluation is a function $v : Formula \rightarrow \mathbb{E}$ where $\mathbb{E} $ is a c-semiring and the following holds:
+%	\begin{list}{-}{ }
+%		\item $v(e) = e$
+%		\item $v(\phi_1 \land \phi_2)=v_1(\phi_1) \otimes v_2(\phi_2)$
+%		\item $v(\phi_1 \lor \phi_2)=v_1(\phi_1) \oplus v_2(\phi_2)$
+%		\item $v(R(t_1,...,t_n)) = (V \rightarrow D+1) \rightarrow \mathbb{E} $
+%		\item $v(t_1=t_2) = (V \rightarrow D+1) \rightarrow \mathbb{B} $
+%		\item $v(\exists x \phi) = v(\bigvee_{t \in D+1} \phi[t/x]) = \bigvee_l \{v(\phi[t/x]) \quad | \quad t \in D+1 \} $
+%	\end{list}	
+%	where $v_1: P_{\mathbb{E}_1} \rightarrow \mathbb{E}_1\times \mathbb{E}_2$ and $v_2: P_{\mathbb{E}_2} \rightarrow \mathbb{E}_1\times \mathbb{E}_2$ are respectively left and right injection into the product.
+%\end{definition}
+
+\begin{theorem}
+	Given a Soft Constraint Automata $\mathcal{A}$, there exists an equivalent representation as a semiring formula $\phi_{\mathcal{A}}$.
+%	, such that :	$$	\phi_{\mathcal{A}} \land \phi_{\mathcal{B}}	$$
+\end{theorem}
+\begin{proof}
+	Given a SCA $\mathcal{A} = \left\langle Q, \rightarrow, C, \mathbb{S}, q_{0}, \right\rangle$, we define an injective function $f : Q \rightarrow \mathbb{N}$ that assigns a unique number $i \in \mathbb{N}$ for all states $q \in Q$. For all transitions $\rightarrow_i = \left\langle q_i, c, s, p_i \right\rangle \in \rightarrow $ we write an equivalent formula $$\phi_i := (m = f(q_i)) \land (m'= f(p_i)) \land s \land c$$
+	The automaton formula results into the following disjunction :
+	\begin{align*}
+	\phi_{\mathcal{A}} 	= 	& 	\bigvee_i \phi_i \\
+						=	&	\bigvee_i (m = f(q_i)) \land (m'= f(p_i)) \land s \land c 
+	\end{align*}
+\end{proof}
+

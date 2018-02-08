@@ -1,0 +1,65 @@
+\section{Semiring Automata}
+%An autonomous system has the particularity of evolving in autonomy inside an environment. Decisions must be periodically made and one way to formally represent the behavior is to use Constraint Automata (CA). States in CA are a configuration of the system (variable assignment). Transitions contain constraint on variable assignment (logical formula), and a transition is allowed if the constraint is satisfied. However, CA are non deterministic automata : from a state, if two transitions are allowed, one transition is chosen non deterministically. Determinising CA is as costly as determinising Buchï automaton : double exponential.
+Constraint Automata is a suitable model to express system in interaction. Each models 
+
+%Let's think about any system and try to formally define it. 
+
+%We start by reminding some notion related to Constraint Automata (CA). An intuitive view of how a CA could be executed is as follow. A Constraint Automata involves a set of variable $V$. Each state of the Constraint Automata is a particular set of variable's assignment. The assignment needs not to be complete (ie, some variable could still be free). From the state, a set of outgoing transitions is defined. A transition involves a constraint, represented by a boolean predicate over a subset of the system's variables. If all the variables involved in the predicate are defined, the formula is evaluated to $true$ or $false$. If some variables are not defined, the assignment is made non deterministically, and the predicate is evaluated.
+
+\begin{definition} (Language of constraint) A term is defined as :
+	$$ t := \quad v \quad | \quad f(t_1, ..., t_n) \quad | \quad * $$
+We note V the set of all variables, and D the data domain of the variables.
+\end{definition}
+
+\begin{definition}
+	Constraint Automata is a tuple $\left\langle Q, \rightarrow, C, q_{0}, \right\rangle$ where : 
+	\begin{list}{-}{ }
+		\item $\mathbb{Q}$ is a set of state and $q_0\in$ Q is the initial state.
+		\item C is a set of constraints, where a constraint is a predicate $P: (V \rightarrow D) \rightarrow \{\top,\bot\}$.
+		\item $\rightarrow \subseteq Q \times C \times Q$ is a finite relation called transition relation.
+		%A transition is denoted by $\left\langle q_i, c, s, p_i \right\rangle \in \rightarrow$
+	\end{list}
+\end{definition}
+
+\begin{example}
+ 
+	\begin{figure}[H]
+		\centering
+		\resizebox{8cm}{!}{\input{fig/moveCA.tikz}}
+		\caption{Soft constraint automata for moving}\label{fig:myfigure}
+	\end{figure}
+\end{example}
+
+\begin{definition}
+	Soft Constraint Automata is a tuple $\left\langle Q, \rightarrow, C, \mathbb{S}, q_{0}, \right\rangle$ where : 
+	\begin{list}{-}{ }
+		\item $Q$ is a set of state and $q_0\in$ Q is the initial state.
+		\item C is a set of semiring predicate, where a semiring predicate is of the shape $P_{\mathbb{S}} : (V \rightarrow D) \rightarrow \mathbb{S} $ and $\mathbb{S}$ is a c-semiring.
+		\item $\rightarrow \subseteq Q \times C \times Q$ is a finite relation called transition relation. 
+		%A transition is denoted by $\left\langle q_i, c, s, p_i \right\rangle \in \rightarrow$
+	\end{list}
+\end{definition}
+
+
+\begin{definition}
+	Given the language of constraint and a c-semiring $\mathbb{E} $, the syntax of a semiring formula $\phi$ is as follows :
+	$$ 
+		\phi := \quad e \quad | \quad \phi_1 \otimes \phi_2 \quad | \quad \phi_1 \oplus \phi_2 \quad | \quad R(t_1,...,t_n) \quad | \quad \exists x \phi \quad | \quad t_1 = t_2 
+	$$
+	where $e \in \mathbb{E}$
+\end{definition}
+
+
+\begin{theorem}
+	Given a Soft Constraint Automata $\mathcal{A}$, there exists an equivalent representation as a semiring formula $\phi_{\mathcal{A}}$.
+%	, such that :	$$	\phi_{\mathcal{A}} \land \phi_{\mathcal{B}}	$$
+\end{theorem}
+\begin{proof}
+	Given a SCA $\mathcal{A} = \left\langle Q, \rightarrow, C, \mathbb{S}, q_{0}, \right\rangle$, we define an injective function $f : Q \rightarrow \mathbb{N}$ that assigns a unique number $i \in \mathbb{N}$ for all states $q \in Q$. For all transitions $\rightarrow_i = \left\langle q_i, c, s, p_i \right\rangle \in \rightarrow $ we write an equivalent formula $$\phi_i := (m = f(q_i)) \land (m'= f(p_i)) \land s \land c$$
+	The automaton formula results into the following disjunction :
+	\begin{align*}
+	\phi_{\mathcal{A}} 	= 	& 	\bigvee_i \phi_i \\
+						=	&	\bigvee_i (m = f(q_i)) \land (m'= f(p_i)) \land s \land c 
+	\end{align*}
+\end{proof}
+

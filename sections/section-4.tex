@@ -1,0 +1,70 @@
+\section{Error and diagnosis}
+\newpage
+Problem 1 : Definition of c-semiring composition. Given $e_1 \in \mathbb{E}_1$ and $e_2 \in \mathbb{E}_2$, how to define the composed semiring $\mathbb{E}$ such that the composition of preferences $e_1$ and $e_2$ belongs to $\mathbb{E}$ and if $e_1=0_{\mathbb{E}_1}$ or $e_2=0_{\mathbb{E}_2}$, the composition is null.
+
+Current solution: $\mathbb{E}=\mathbb{E}_1 \times \mathbb{E}_2$ definition of homomorphisms $h : \mathbb{E}_1 \rightarrow \mathbb{E}_1 \times \mathbb{E}_2$ and $g : \mathbb{E}_2 \rightarrow \mathbb{E}_1 \times \mathbb{E}_2$, and the composed value $e = h(e_1) \otimes_{{\mathbb{E}_1} \times {\mathbb{E}_2}} g(e_2)$. Such that :
+\begin{list}{}{}
+	\item\normalfont $$h(e) = \begin{cases}
+	\left \langle 0_{\mathbb{E}_1}, 0_{\mathbb{E}_2} \right \rangle & \text{if } e = 0_{\mathbb{E}_1}\\
+	\left \langle e, 1_{\mathbb{E}_2} \right \rangle & \text{otherwise }  
+	\end{cases} \quad \quad g(e) = \begin{cases}
+	\left \langle 0_{\mathbb{E}_1}, 0_{\mathbb{E}_2} \right \rangle & \text{if } e = 0_{\mathbb{E}_2}\\
+	\left \langle 1_{\mathbb{E}_1}, e \right \rangle & \text{otherwise }  
+	\end{cases} $$
+\end{list}
+
+Another approach : $\mathbb{E} = \mathbb{E}_1 \coprod \mathbb{E}_2$ is the co-product, defined as the direct sum of $\mathbb{E}_1$ and $\mathbb{E}_2$. We define the correct morphism from $\mathbb{E}_1 \coprod \mathbb{E}_2$ to the product we are interested in. There is a unique morphism f such that $g = f \circ i_2$ and $h = f \circ i_1$. 
+ \begin{filecontents*}{temp.tikz}
+	\begin{tikzpicture}[>=latex,shorten >=1pt,node distance=3cm,on grid,auto, node/.style={circle,draw=none,minimum size=25pt}, ]
+	
+	\node[state,draw=none] (E) at (0pt,0pt) {$E$};
+	\node[state,draw=none , right = of E] (F) {$F$};
+	\draw[right hook-latex] (E) to[out=0,in=180] node[above] {h} (F);
+	\end{tikzpicture}
+\end{filecontents*}
+%\begin{figure}[H]
+%	\centering
+%	\resizebox{5cm}{!}{\input{temp.tikz}}
+%	\caption{homomorphism between c-semiring}\label{fig:myfigure}
+%\end{figure}
+
+\begin{filecontents*}{temp.tikz}
+	\begin{tikzpicture}[>=latex,shorten >=1pt,node distance=3cm,on grid,auto, node/.style={circle,draw=none,minimum size=25pt}, ]
+	
+	\node[state,draw=none] (C) at (0pt,0pt) {$E_1 \coprod E_2$};
+	\node[state,draw=none , below right = of C] (F) {$E_1$};
+	\node[state,draw=none , below left = of C] (E) {$E_2$};
+	\node[state,draw=none ] (EF) at ($(E)!0.5!(F)$) {$E_1 \times E_2$};
+	\draw[->] (E) to[] node[above] {$i_2$} (C);
+	\draw[->] (F) to[] node[above,right] {$i_1$} (C);
+	\draw[dashed, ->] (C) to[] node[right] {f} (EF);
+	\draw[right hook-latex] (E) to[out=0,in=180] node[above] {g} (EF);
+	\draw[left hook-latex] (F) to[out=180,in=0] node[above] {h} (EF);
+	\end{tikzpicture}
+\end{filecontents*}
+\begin{figure}[H]
+	\centering
+	\resizebox{5cm}{!}{\input{temp.tikz}}
+	\caption{coproduct and universal property}\label{fig:myfigure}
+\end{figure}
+
+Problem 2 : composition of cancellative c-semirings does not define a cancellative c-semiring : needed for h and g to be reflecting homomorphism. Given $\mathbb{E}$ and $\mathbb{F}$ two cancellative c-semirings, here is a motivation example :
+$$
+\left \langle 0_{\mathbb{E}}, 1_{\mathbb{F}} \right \rangle \otimes_{\mathbb{E}\times\mathbb{F}} \left \langle 1_{\mathbb{E}}, 0_{\mathbb{F}} \right \rangle =
+\left \langle 0_{\mathbb{E}}, 0_{\mathbb{F}} \right \rangle =
+\left \langle 0_{\mathbb{E}}, 0_{\mathbb{F}} \right \rangle \otimes_{\mathbb{E}\times\mathbb{F}}
+\left \langle 0_{\mathbb{E}}, 1_{\mathbb{F}} \right \rangle
+$$
+
+Current approach : define the join composition $\mathbb{E} \odot \mathbb{F}$ over the carrier $(\mathcal{C}(E) \times \mathcal{C}(F)) \cup \{(0_{\mathbb{E}},0_{\mathbb{F}})\}$  and the lex composition $\mathbb{E} \triangleright \mathbb{F}$ over the carrier $(\mathcal{C}(E) \times F) \cup (\overline{\mathcal{C}}(E) \times 0_{\mathbb{F}})$
+\newpage
+Taking c-semiring definition of [Tobias], we can view a Soft Component System as a table where each assignement is assign a corresponding semiring value. Note that we encode the constraint as boolean semiring value.
+
+\newpage
+\begin{theorem} (a composite c-semiring is a c-semiring)
+
+	\begin{list}{-}{ }
+	\item  test
+	\end{list}
+\end{theorem}
+%Preferences as a first class concept

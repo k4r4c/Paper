@@ -1,0 +1,35 @@
+%\begin{definition}
+%	E and F csemirings, we define the tensor product $E \otimes_{\mathbb{N}} F$ where, given $e_1,e_2 \in E$ and $f_1,f_2 \in F$ : 
+%	$$	(e_1 \otimes f_1)(e_2 \otimes f_2) = (e_1 e_2) \otimes (f_1 f_2)	$$
+%	This product is $\mathbb{N}$-bilinear, associative, and unital with an identity element given by $1_E \otimes 1_F$, where $1_E$ and $1_F$ are the identities of E and F.
+%\end{definition}
+
+\begin{definition} We define the disjoint u(nion of two sets A and B while identifying elements of the intersection S:	
+	$$A \cup_{S}B = (A \uplus B)/\sim, \quad x \sim y \Leftrightarrow x=y \in S$$
+\end{definition}
+
+Free(X) is the smallest set such that :
+\begin{enumerate}
+	\item $X \subseteq Free(X)$
+	\item $x,y \in Free(X) \Rightarrow x \otimes y \in Free(X)$
+	\item $x,y \in Free(X) \Rightarrow x + y \in Free(X)$
+\end{enumerate}
+
+We define ${\equiv} \subset Free(X)^2$ as the smallest congruence with regard to $\otimes,+$:
+\begin{enumerate}
+	\item $x \otimes y \equiv y \otimes x$
+	\item $(x+x')\otimes y \equiv x \otimes y + x' \otimes y$
+	\item $(x \otimes y) \otimes z \equiv x \otimes (y \otimes z)$
+\end{enumerate}
+
+\begin{definition} Given E,F csemiring and $\mathbb{B}$ the boolean csemiring, the tensor product  $E\otimes_{\mathbb{B}}F$ defined by the tuple $\langle Free(E \cup_{\mathbb{B}} F) /\equiv, +, \otimes, 0_{\mathbb{B}}, 1_{\mathbb{B}} \rangle $ is the co-product of E and F.
+\end{definition}
+
+
+Since + is idempotent in a csemiring, the tensor product needs only be defined over a Boolean semiring. There exists a natural embedding of csemiring E and F into the tensor product $E \otimes_{\mathbb{B}} F$ with the maps $i_E : E \rightarrow E \otimes_{\mathbb{B}} F, e \longmapsto e \otimes 1_F  $ and $i_F : F \rightarrow E \otimes_{\mathbb{B}} F, f \longmapsto 1_E \otimes f  $.
+\begin{figure}[H]
+	\centering
+	\resizebox{8cm}{!}{\input{fig/coprod.tikz}}
+	\caption{Coproduct universal property}
+	\label{coprod}
+\end{figure}

@@ -1,0 +1,39 @@
+\section{Preferences}
+
+%\subsection*{Target}
+%\begin{enumerate}
+%	\item Constraint Semiring and intuition (choice and composition operator).
+%	\item Properties of csemirings (induced order, some examples).
+%	\item CoProduct of Constraint Semiring.
+%	\item Quotient of Constraint Semiring.	
+%\end{enumerate}
+
+We want to get an intuition about how preferences interfere and describe a system's behavior. In the simple example described with west and east actions, the system's behavior can be described by sequences of actions taken by the system. Thus, the sequence $\langle west, east \rangle ^{\omega}$ is one infinite stream allowed by the automaton, representing the case where the robot is alternating between $west$ and $east$. Similarly, $\langle stay_{lon} \rangle ^{\omega}$ is also a possible behavior of the system, where the only action taken is $stay_{lon}$. Since constraint automata only tells whether a stream is part of the accepted behavior, we now search for expressing order among accepted behavior. Thus, $\Sigma^{\omega} \rightarrow 2$ becomes $\Sigma^{\omega} \rightarrow A$, where A is a suitable algebraic structure to order the streams.
+
+There exist multiple way to define preferences. An approach used in \cite{bibid} uses multi valued systems. Lattices. Monoids. In \cite{bibid}, use of csemiring. The preference in choosing between different mathematical structure for preferences resides in certain properties internal to those structures. We want preferences to be \textbf{compositional} and (partially) \textbf{ordered}. We will justify in the second section why composition and order are necessary.
+
+\subsection*{Constraint semiring and properties}
+\input{subsections/Preferences/Intro}
+
+\input{subsections/Preferences/CSemiring}
+
+\input{subsections/Preferences/Examples}
+
+Now that we expressed how to use csemiring to express preferences and choices, we want to be able to model multi criteria choices. Since a csemiring represent one projection of the choice (for instance smallest distance for a trekker), it would also be interesting to express several other dimensions (for instance hardness of the slope, beauty of the landscape, calm of the path, ..). We introduce in the next section the space where product of csemiring are defined : co-product.
+
+\subsection*{Co-product of csemiring}
+
+\input{subsections/Preferences/Tensor}
+
+%\input{subsections/Preferences/TensorProduct}
+
+\subsection*{Quotients}
+
+\input{subsections/Preferences/Quotient}
+%\input{subsections/Preferences/CoProduct}
+
+%\input{subsections/Preferences/CoProductProp}
+
+%\input{subsections/Preferences/Quotient}
+
+%\input{subsections/Preferences/QuotientProp}

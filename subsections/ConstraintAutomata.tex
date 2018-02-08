@@ -1,0 +1,57 @@
+\subsection{Constraint Automata}
+
+%	Constraint Automata structure :
+%		Introduction 
+%			why using constraint automata ?
+%			some examples of problems, and some applications.
+%		
+%
+%
+
+\input{subsections/ConstraintAutomata/Intro}
+
+\input{subsections/ConstraintAutomata/definition/LoC}
+
+%\input{subsections/ConstraintAutomata/proposition/Sat}
+
+\input{subsections/ConstraintAutomata/example/Constraint}
+
+\input{subsections/ConstraintAutomata/definition/CA}
+
+%\noindent \textbf{Constraint Automata.}
+
+\input{subsections/ConstraintAutomata/example/moveCA}
+
+\input{subsections/ConstraintAutomata/definition/composition}
+
+\input{subsections/ConstraintAutomata/example/Composition}
+
+
+
+
+
+
+
+
+
+
+%A constraint $c$ is satisfiable if there exist an assignment $\delta : V_{c}\rightarrow D$ such that $\delta \models c$. The choice of variable name in the construction of formula will determine whether a composed constraint can be satisfied or not. 
+
+%\input{subsections/ConstraintAutomata/proposition/Sat}
+
+%In the case where the sets of free variables of two composed constraints intersect, the constraints are said to be in interactions and could no longer be satisfiable. If $c_1 := x=4 $ and $c_2 := x>5 $, the composed constraint $c := c_1 \land c_2 := x=4 \land x>5 $ is not satisfiable.
+%\begin{example} Lets note $\underline{x}$ as a port variable, and build a constraint $c := \underline{a} = \underline{b}$.
+%\end{example}
+
+%\input{subsections/ConstraintAutomata/definition/CA}
+
+%\begin{note}	It is possible to encode independent progress on each state $q\in Q$ by adding a transition $(q,\phi,q)$ where $\phi$ represents the constraint where no ports involve on outgoing transitions fire.\end{note}
+
+%\input{subsections/ConstraintAutomata/example/moveCA}
+
+
+%Composition of constraint automata as defined in \cite{BSAR06} leads to a new constraint automaton. 
+
+%\input{subsections/ConstraintAutomata/definition/composition}
+
+%The composition of two constraint automata blindly compose constraints together. From the composed set of constraints, we can identified some formula that can never be satisfied (i.e. identify to $\bot$). In this case, the constraint and its associated transition can be removed from the automaton.

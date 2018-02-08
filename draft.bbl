@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{Arbab2013}
+Farhad Arbab and Francesco Santini.
+\newblock {\em Preference and Similarity-Based Behavioral Discovery of
+  Services}, pages 118--133.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2013.
+
+\bibitem{B04}
+Stefano Bistarelli.
+\newblock {\em Semiring for Soft Constraint Solving and Programming}.
+\newblock Springer, 2004.
+
+\bibitem{KAT17}
+Tobias Kapp{\'{e}}, Farhad Arbab, and Carolyn~L. Talcott.
+\newblock A component-oriented framework for autonomous agents.
+\newblock pages 20--38, 2017.
+
+\bibitem{MSA03}
+Marjan~Sirjani Nikunj R.~Mehta and Farhad Arbab.
+\newblock Effective modeling of software architectural assemblies using
+  constraint automata.
+\newblock 2003.
+
+\end{thebibliography}

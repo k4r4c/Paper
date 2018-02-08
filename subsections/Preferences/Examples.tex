@@ -1,0 +1,34 @@
+\begin{example}
+Examples of c-semirings :
+\begin{list}{-}{}
+	\item The Boolean semiring $\mathbb{B}$:	$\left\langle \{\top,\bot\}, \lor, \land, \boldmath{1}_{\mathbb{B}}, \boldmath{0}_{\mathbb{B}} \right\rangle$ where $\boldmath{0}_{\mathbb{B}}=\bot$ and $\boldmath{1}_{\mathbb{B}}=\top$
+	
+	\item The Weighted semiring $\mathbb{W}$ :$\left\langle \mathbb{N}\cup\{\infty\}, \min, +, \boldmath{1}_{\mathbb{W}}, \boldmath{0}_{\mathbb{W}} \right\rangle$ where $\boldmath{0}_{\mathbb{W}}=\infty$ and $\boldmath{1}_{\mathbb{B}}=0$	
+\end{list}
+
+\paragraph{Application}
+In the case of our trekker, he first uses boolean semiring to model his choice. If we $left$ and $right$ are propositional variable, we could model the trekker's choice by the following value :
+$$ 	TrekChoice = left \lor right $$
+Without any information, he can either chose left (make left true) or right.
+
+Now that he has access to the distance, he can chose a weighted semiring instead, and model his choice by the following function :
+$$
+	TrekChoice = 	\left\{
+	\begin{array}{rl}
+	left \quad & \text{ if } l+_Wr= min(l,r) = l \\
+	right \quad & \text{ otherwise }
+	\end{array}
+	\right.
+$$
+where $l$ is the time it takes on the left path, and $r$ on the right path.
+%\paragraph{Example}
+%\begin{list}{-}{}
+%	\item The Boolean semiring $\mathbb{B}$:
+%	$$\left\langle \{\top,\bot\}, \lor, \land, \boldmath{1}_{\mathbb{B}}, \boldmath{0}_{\mathbb{B}} \right\rangle$$ where $\boldmath{0}_{\mathbb{B}}=\bot$ and $\boldmath{1}_{\mathbb{B}}=\top$
+%	Remarque : boolean semiring is a structure for valuation of first order logic sentences.
+	
+%	\item The Weighted semiring $\mathbb{W}$ :
+%	$$\left\langle \mathbb{N}\cup\{\infty\}, \min, \max, \boldmath{1}_{\mathbb{W}}, \boldmath{0}_{\mathbb{W}} \right\rangle$$ where $\boldmath{0}_{\mathbb{W}}=\infty$ and $\boldmath{1}_{\mathbb{B}}=0$	
+%\end{list}
+\end{example}
+

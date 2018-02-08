@@ -1,0 +1,15 @@
+ \begin{tikzpicture}[>=latex,shorten >=1pt,node distance=3cm,on grid,auto, node/.style={circle,draw,minimum size=25pt}, ]
+
+ \node[state] (q0) at (-40pt,0pt) {$q_S$};
+ \node[state, right = of q0] (q1) {$q_M$};
+ \node[state, right = of q1] (q2) {$q_N$};
+
+ \draw[<-,text=white] (q1) -- node[] {} ++(0,1);
+ \draw[->] (q1) to[out=200,in=-20] node[below] {south,0} (q0);
+ \draw[->] (q0) to[out=20,in=160] node[above] {north, 5} (q1);
+ \draw[->] (q2) to[out=200,in=-20] node[below] {south, 5} (q1);
+ \draw[->] (q1) to[out=20,in=160] node[above] {north, 0} (q2);
+ \draw[->] (q0) to[out=-70,in=-110,looseness=8] node[below, align=left] {stay$_{lon}$} (q0);
+ \draw[->] (q1) to[out=-70,in=-110,looseness=8] node[below, align=left] {stay$_{lon}$} (q1);
+ \draw[->] (q2) to[out=-70,in=-110,looseness=8] node[below, align=left] {stay$_{lon}$} (q2);
+ \end{tikzpicture}

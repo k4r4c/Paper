@@ -1,0 +1,47 @@
+\title{Don't crisp your system}
+
+\author{Benjamin Lion\inst{1} \and Farhad Arbab\inst{2}}
+
+\institute{CWI, Amsterdam, Netherlands,\\
+	\email{I.Ekeland@princeton.edu},\\ WWW home page:
+	\texttt{http://users/\homedir iekeland/web/welcome.html}
+	\and
+	Universit\'{e} de Paris-Sud,
+	Laboratoire d'Analyse Num\'{e}rique, B\^{a}timent 425,\\
+	F-91405 Orsay Cedex, France}
+
+%\maketitle
+
+\section{A need for preferences}
+Building complex systems is easier when it results to composing simpler systems. This approach has been taken to design autonomous systems : an autonomous system is made of simpler systems in interaction. In a real world, an autonomous system must interact with its environment. However, the environment is by definition unpredictable, and can not be completely modeled by the system. Given some properties, the autonomous system should be able to detect an unpredicted situation and adapt to it. More precisely, when the system reaches an unpredicted state, it should diagnosis which of its component is responsible of leading to the error state. By tracing back the error to smaller components, it's then possible to localize and correct our system in a modular way such that the undesired behavior is removed.
+
+\subsection{assumptions}
+In this section, we describe several assumptions about the system considered. More particularly, the notion of system, autonomous and environment need to be detailed.
+\begin{list}{-}{ }
+	\item property : a behavior that must be observed.
+	\item system : satisfy a set of properties.
+	% set of internal variables and external variables, in interaction with environment. An assignement of value to variable leads the system to a new state. A trace is a sequence of variable assignement.
+	\item environment : unpredictable by a system evolving in this environment.
+	\item autonomous : a system satisfying a set of properties in an environment.
+\end{list}
+
+\subsection{goal}
+\begin{list}{-}{ }
+	\item 
+\end{list}
+
+\subsection{strategy}
+Diagnostic method for an autonomous system evolving in an unpredictable environment, given a set of properties to satisfy. 
+
+%Binary logic, binary constraints answer binary problems.
+%Many problems are not binary : should I turn left or right, go up or left; not the apropriate question, neither yes or no a good answer. In those cases, it's a matter of preferences. I prefer to go left rather going right in 50\% of cases. I can then select, from a set of possibility, the preferred action, the best regarding my objective. 
+%Preferences open a new class of problems, that involves ordering over choices.
+%\begin{list}{-}{1pt}
+%	\item Currently : definition of CA and composition with REO
+%	\item Objectif : translation of SCA into semiring automata, semiring automata into soft predicate, soft predicate into ***
+%	\item Steps : what is semiring automata and what is the map SCA -> SA ; What is composition operator 
+%\end{list}
+%We present a new description of a soft constraint automata, by unifying constraint and preferences into a semiring domain.
+%We present a new semantic, called semiring automata, where a SCA is a set of semiring formula. We define a composition operator among semiring automata, and compilation to soft guarded command. The guarded command serve as template for any backend compilation.
+
+%Where does softness live ?

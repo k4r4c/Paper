@@ -1,0 +1,25 @@
+%	Make clear some concepts we are dealing with. Such as system, autonomous, environment and preferences.
+%	Introduction : 
+%		- there exist SCA, based on c-semiring. It is possible to define what a soft system is (without crisp constraints). 
+%		- however, composition is intrinsecly related to its type (lexico, join, ..).
+%		- we present a new c-semiring composition, based on the co-product. This composition extend the precedent composition operator, and is the base for a new automata definition : c-semiring automata. 
+%
+%
+
+%The necessity of a coordination oriented formalization of complex systems to reason about properties under composition.
+%Soft Constraint Automata (SCA) have been developed by Arbab \& Santini \cite{Arbab2013} and constitute a solid ground to design and reason about systems with preferences. Instead of being restricted to crisp constraint, SCA defines soft constraints, based on c-semiring, and can choose the most preferred among a set of choices. Besides a choice operator, composition is also possible and results into new preferences. Defining global preferences by composition of local preferences is a design choice that we do not justify in this paper. Intuitively, the objective is to be able to remove an error of the composed automata by modifying preferences in the composite automata. A diagnosis procedure has been detailed by \cite{KAT17} . Thus, composition is at the core of the definition of Soft Constraint systems. However, composition is only define for the same type of preferences. In this paper, we first present the definition of a new composition framework for preferences in Soft Constraint Automata, by using the co-product. It allows us to extend the range of possible preferences composition. Then, the definition of a new concise model to represent, in a unified way, constraints and preferences into a semiring logic. In this framework, the logic is no more boolean, but semiring based. As a justification for those two points, we show along the paper that this new model is at least as expressive as Soft Constraint Automata, and can define composition operators as a quotient of the co-product.
+
+
+Soft Constraint Automata (SCA) have been developed by Arbab \& Santini \cite{Arbab2013} and constitute a solid ground to design and reason about systems with preferences. Instead of being restricted to crisp constraint, SCA defines soft constraints, based on c-semiring, and can choose the most preferred among a set of choices. Besides a choice operator, composition is also possible and results into new preferences. Defining global preferences by composition of local preferences is a design choice that we do not justify in this paper. Intuitively, the objective is to be able to remove an error of the composed automata by modifying preferences in the composite automata. A diagnosis procedure has been detailed by \cite{KAT17} . Thus, composition is at the core of the definition of Soft Constraint systems. 
+
+Until now, several composition operators are defined (ex: lexicographic, join). The choice of the product space must be done before composition.
+
+In this paper, we first present the definition of a new composition framework for preferences in Soft Constraint Automata, by using the co-product. Composition is decoupled from quotient to product space. Lexicographic or join quotients are defined.
+
+Then, the definition of a new concise model to represent, in a unified way, constraints and preferences into a semiring logic. Logic is extended to any csemiring (not only boolean csemiring). 
+%As a justification for those two points, we show along the paper that this new model is at least as expressive as Soft Constraint Automata, and can define composition operators as a quotient of the co-product.
+
+%We present a new composition of preferences, that allows different types.
+%In this paper, we present a complete procedure, from design of soft constraint systems, to code generation. The core concept of this procedure is the semantic preserving translation from SCA to a semiring logic, that enables new transformations. In the first part, we present definitions of Constraint Automata, semiring preferences and Soft Constraint Automata, and compare CA and SCA. In the second part, we focus on the new description of soft constraint systems using the definition of a semiring logic. %In this paper, two main contributions are presented. First,  
+
+

@@ -1,0 +1,20 @@
+ \begin{tikzpicture}[>=latex,shorten >=1pt,node distance=3cm,on grid,auto, node/.style={circle,draw,minimum size=25pt}, ]
+
+ \node[state] (q0) at (-40pt,0pt) {$q_0$};
+ \node[state, right = of q0] (q1) {$q_1$};
+ \node[state, right = of q1] (q2) {$q_2$};
+ \node[state, right = of q2] (q3) {$q_3$};
+ \node[state, right = of q3] (q4) {$q_4$};
+ \draw[<-] (q4) -- node[above right] {} ++(1,0);
+ \draw[->] (q1) to[out=200,in=-20] node[below] {discharge$_1$, 2} (q0);
+ \draw[->] (q0) to[out=20,in=160] node[above] {charge, 0} (q1);
+ \draw[->] (q2) to[out=-110,in=-70,looseness=0.7] node[below] {discharge$_2$, 5} (q0);
+ \draw[->] (q2) to[out=200,in=-20] node[below] {discharge$_1$, 2} (q1);
+ \draw[->] (q1) to[out=20,in=160] node[above] {charge, 0} (q2);
+ \draw[->] (q3) to[out=-110,in=-70,looseness=0.7] node[below] {discharge$_2$, 5} (q1);
+ \draw[->] (q3) to[out=200,in=-20] node[below] {discharge$_1$, 2} (q2);
+ \draw[->] (q2) to[out=20,in=160] node[above] {charge, 0} (q3);
+ \draw[->] (q4) to[out=-110,in=-70,looseness=0.7] node[below] {discharge$_2$, 5} (q2);
+ \draw[->] (q4) to[out=200,in=-20] node[below] {discharge$_1$, 2} (q3);
+ \draw[->] (q3) to[out=20,in=160] node[above] {charge, 0} (q4);
+ \end{tikzpicture}

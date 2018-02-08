@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/dev/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: draft.aux
+The style file: plain.bst
+Database file #1: ../Bib/mybib.bib
+A bad cross reference---entry "KAT17"
+refers to entry "DBLP:conf/facs2/2017", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/facs2/2017"
+Name 1 in "Nikunj R. Mehta, Marjan Sirjani, and Farhad Arbab" has a comma at the end for entry MSA03
+while executing---line 1049 of file plain.bst
+Warning--can't use both author and editor fields in Arbab2013
+Warning--empty journal in KAT17
+Name 1 in "Nikunj R. Mehta, Marjan Sirjani, and Farhad Arbab" has a comma at the end for entry MSA03
+while executing---line 1090 of file plain.bst
+Warning--empty journal in MSA03
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            528 strings with 4907 characters,
+and the built_in function-call counts, 1340 in all, are:
+= -- 131
+> -- 51
+< -- 2
++ -- 21
+- -- 16
+* -- 75
+:= -- 216
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 18
+chr.to.int$ -- 0
+cite$ -- 7
+duplicate$ -- 62
+empty$ -- 107
+format.name$ -- 16
+if$ -- 289
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 6
+newline$ -- 23
+num.names$ -- 8
+pop$ -- 31
+preamble$ -- 1
+purify$ -- 16
+quote$ -- 0
+skip$ -- 49
+stack$ -- 0
+substring$ -- 77
+swap$ -- 19
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 12
+warning$ -- 3
+while$ -- 14
+width$ -- 5
+write$ -- 43
+(There were 3 error messages)

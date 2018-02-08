@@ -1,0 +1,12 @@
+ \begin{tikzpicture}[>=latex,shorten >=1pt,node distance=3cm,on grid,auto, node/.style={circle,draw,minimum size=25pt}, ]
+ 
+ \node[draw=none] (q0) at (0pt,0pt) {$G$};
+ \node[draw=none, right = of q0] (q1) {$F$};
+ \node[draw=none, left = of q0] (q2) {$E$};
+ \node[draw=none, above = of q0] (q3) {$E \otimes_{\mathbb{B}} F$};
+ \draw[->] (q1) to node[above right] {$i_F$} (q3);
+ \draw[->] (q2) to node[above left] {$i_E$} (q3);
+ \draw[->] (q1) to node[above] {f} (q0);
+ \draw[->] (q2) to node[above] {e} (q0);
+ \draw[dashed,->] (q3) to node[right] {g} (q0);
+ \end{tikzpicture}

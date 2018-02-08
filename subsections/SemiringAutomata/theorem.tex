@@ -1,0 +1,12 @@
+\begin{theorem}
+	Given a Soft Constraint Automata $\mathcal{A}$, there exists an equivalent representation as a c-semiring formula $\phi_{\mathcal{A}}$.
+%	, such that :	$$	\phi_{\mathcal{A}} \land \phi_{\mathcal{B}}	$$
+\end{theorem}
+\begin{proof}
+	Given a SCA $\mathcal{A} = \left\langle Q, \rightarrow, C, \mathbb{S}, q_{0}, \right\rangle$, we define an injective function $f : Q \rightarrow \mathbb{N}$ that assigns a unique number $i \in \mathbb{N}$ for all states $q \in Q$. For all transitions $\rightarrow_i = \left\langle q_i, c_i, s_i, p_i \right\rangle \in \rightarrow $ we write an equivalent formula $$\phi_i := (m = f(q_i)) \land (m'= f(p_i)) \land s_i \land c_i$$
+	The automaton formula results into the following disjunction :
+	\begin{align*}
+	\phi_{\mathcal{A}} 	= 	& 	\bigvee_i \phi_i \\
+						=	&	\bigvee_i (m = f(q_i)) \otimes (m'= f(p_i)) \otimes s_i \otimes c_i 
+	\end{align*}
+\end{proof}

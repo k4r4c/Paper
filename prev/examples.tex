@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{tikz}
+\usepackage{filecontents}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+
+
+\lstdefinestyle{base}{
+  emptylines=1,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  basicstyle=\footnotesize\ttfamily,
+  moredelim=**[is][\color{red}]{@}{@},
+}
+
+\usetikzlibrary{arrows}
+\begin{document}
+\paragraph{Some examples of global threshold utilization:} \hspace{0pt} \\
+
+\begin{filecontents*}{temp.tikz}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\small}, align=center, text width=0.5cm]
+
+  \node[main node] (1) {$q_1$};
+  \node[main node, node distance=3cm] (2) [right of=1] {$q_2$};
+  \node[main node, node distance=6cm] (3) [left of=1] {$q_0$};
+  
+  \node[align=left,font=\sffamily\small] (C) at (-6.2,1.2) {\text{raise $e_0$, $t_0$}};
+  \node[align=left,font=\sffamily\small] (C) at (-6.2,-1.2) {\text{wait $e_1$, $t_1$}};
+  \node[align=left,font=\sffamily\small] (D) at (1,1) {\text{east , $e_2$, $t_2$ }};
+  \node[align=left,font=\sffamily\small] (D) at (-2.3,0) {\text{west, $e_3$, $t_3$ }\\\text{catch $e_4$, $t_4$ }};
+  \node[align=left,font=\sffamily\small] (E) at (1,-1) {\text{west , $e_5$, $t_5$}};
+  \node[align=left,font=\sffamily\small] (E) at (4.5,0) {\text{east, $e_6$, $t_6$}\\ \text{catch, $e_7$, $t_7$}};
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge [bend left] node [above,sloped] {} (2)
+    (1) edge [loop left] node [above,sloped] {} (1)
+    (2) edge [bend left] node [below,sloped] {} (1)
+    (2) edge [loop right] node [above,sloped] {} (2)
+    (3) edge [loop above] node [above,sloped] {} (3)
+    (3) edge [loop below] node [above,sloped] {} (3)
+\end{tikzpicture}
+\end{filecontents*}
+\begin{figure}[htb]
+\centering
+\resizebox{13cm}{!}{\input{temp.tikz}}
+\caption{Automata $A_0$ on the left and $A_1$ on the right}\label{fig:myfigure}
+\end{figure}
+
+$\text{\{raise, west, east, wait, catch\}}$ are all possible actions. $e_i$ and $t_i$ are respectively the semiring value and the threshold associated to the corresponding transition.
+Each automaton has a global threshold $T_{A_i}$ such that $A_{|T_{A_i}}$ is the restriction of the automaton to all transition involving semiring values below $T_{A_i}$.
+In the next figure, some values have been associated with each $e_i$ and $t_i$
+\begin{filecontents*}{temp.tikz}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\small}, align=center, text width=0.5cm]
+
+  \node[main node] (1) {$q_1$};
+  \node[main node, node distance=3cm] (2) [right of=1] {$q_2$};
+  \node[main node, node distance=6cm] (3) [left of=1] {$q_0$};
+  
+  \node[align=left,font=\sffamily\small] (C) at (-6.2,1.2) {\text{raise 1, 3}};
+  \node[align=left,font=\sffamily\small] (C) at (-6.2,-1.2) {\text{wait 2, 4}};
+  \node[align=left,font=\sffamily\small] (D) at (1,1) {\text{east , 3, 4 }};
+  \node[align=left,font=\sffamily\small] (D) at (-2.3,0) {\text{west, 3, 4 }\\\text{catch 6, 7 }};
+  \node[align=left,font=\sffamily\small] (E) at (1,-1) {\text{west , 3, 4}};
+  \node[align=left,font=\sffamily\small] (E) at (4.5,0) {\text{east, 3, 4}\\ \text{catch, 6, 7}};
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge [bend left] node [above,sloped] {} (2)
+    (1) edge [loop left] node [above,sloped] {} (1)
+    (2) edge [bend left] node [below,sloped] {} (1)
+    (2) edge [loop right] node [above,sloped] {} (2)
+    (3) edge [loop above] node [above,sloped] {} (3)
+    (3) edge [loop below] node [above,sloped] {} (3)
+\end{tikzpicture}
+\end{filecontents*}
+\begin{figure}[htb]
+\centering
+\resizebox{13cm}{!}{\input{temp.tikz}}
+\caption{Automata $A_0$ on the left and $A_1$ on the right}\label{fig:myfigure}
+\end{figure}
+
+Let $T_{A_0}=3$ and  $T_{A_1}=5$. We assume that raise can only compose with catch, and wait can only compose with west or east. There are now two possibilities to compose $A_1$ and $A_0$. Either :
+$$A = (A_0 \otimes A_1)_{|T_{A_0} \otimes T_{A_1}} $$
+\begin{filecontents*}{temp.tikz}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\small}, align=center, text width=0.5cm]
+
+  \node[main node] (1) {$q_1$};
+  \node[main node, node distance=3cm] (2) [right of=1] {$q_2$};
+
+  \node[align=left,font=\sffamily\small] (D) at (1,1) {\text{east-wait , 5, 8 }};
+  \node[align=left,font=\sffamily\small] (D) at (-3,0) {\text{west-wait, 5, 8 }\\\text{catch-raise 7, 10 }};
+  \node[align=left,font=\sffamily\small] (E) at (1,-1) {\text{west-wait , 5, 8}};
+  \node[align=left,font=\sffamily\small] (E) at (4.5,0) {\text{east-wait, 5, 8}\\ \text{catch-raise, 7, 10}};
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge [bend left] node [above,sloped] {} (2)
+    (1) edge [loop left] node [above,sloped] {} (1)
+    (2) edge [bend left] node [below,sloped] {} (1)
+    (2) edge [loop right] node [above,sloped] {} (2)
+\end{tikzpicture}
+\end{filecontents*}
+\begin{figure}[htb]
+\centering
+\resizebox{10cm}{!}{\input{temp.tikz}}
+\caption{Automata $A=(A_0 \otimes A_1)_{|T_{A_0} \otimes T_{A_1}}$ with $T_{A}=8$}\label{fig:myfigure}
+\end{figure}
+
+\newpage
+Or :
+$$A = {A_0}_{|T_{A_0}} \otimes {A_1}_{|T_{A_1}} $$
+
+\begin{filecontents*}{temp.tikz}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\small}, align=center, text width=0.5cm]
+
+  \node[main node] (1) {$q_1$};
+  \node[main node, node distance=3cm] (2) [right of=1] {$q_2$};
+
+  \node[align=left,font=\sffamily\small] (D) at (1,1) {\text{east-wait , 5, 8 }};
+  \node[align=left,font=\sffamily\small] (D) at (-3,0) {\text{west-wait, 5, 8 }};
+  \node[align=left,font=\sffamily\small] (E) at (1,-1) {\text{west-wait , 5, 8}};
+  \node[align=left,font=\sffamily\small] (E) at (4.5,0) {\text{east-wait, 5, 8}};
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge [bend left] node [above,sloped] {} (2)
+    (1) edge [loop left] node [above,sloped] {} (1)
+    (2) edge [bend left] node [below,sloped] {} (1)
+    (2) edge [loop right] node [above,sloped] {} (2)
+\end{tikzpicture}
+\end{filecontents*}
+\begin{figure}[htb]
+\centering
+\resizebox{10cm}{!}{\input{temp.tikz}}
+\caption{Automata $A={A_0}_{|T_{A_0}} \otimes {A_1}_{|T_{A_1}}$ with $T_{A}=8$}\label{fig:myfigure}
+\end{figure}
+
+This threshold can be usefull to separate composition of \textit{internal} actions and \textit{external} actions. An action can be defined as \textit{internal} if it involves a single agent (west or east action). An action is called \textit{external} if it needs some other agents to be allowed (catch for instance). In this scope, internal actions have low semiring values, and external actions have high semiring values. By defining a global threshold $T_A$, and a restriction of the Automaton regarding the threshold, we allow only composition of internal action, or internal and external actions.
+
+\end{document}
+
+

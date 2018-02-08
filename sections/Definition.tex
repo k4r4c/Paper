@@ -1,0 +1,26 @@
+\section{Definition}
+%	Definition introduction :
+% Let just describe what we need to define our two main points : new composition operator on preferences, and semiring automata.This section present all the main ingredient for the definition of semiring automata in the next section. As we talk about constraint systems, we start with the definition of Constraint Automata (CA), the fundamental brick for our construction. Since constraints are crisps in CA, we then define c-semiring, a mathematical structure in which our preferences live. The last definition refers to Soft Constraint Automata, an extension of Constraint Automata with preferences. Each of the following structure (CA, c-semiring, SCA) is paired with a closed composition operator. Moreover, every definitions are directly motivated by some examples.
+
+\input{subsections/ConstraintAutomata}
+
+\input{subsections/Preference}
+
+%\input{subsections/SoftConstraintAutomata}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%Compositionality is necessary to define a complex system as a composition of simpler systems. For this reason, we make sure that the following definitions respect a closure property under composition. 
+%In order to get an intuition behind the definitions of this section, I suggest the following approach : as long as nothing is specified, everything is possible. We then start with an infinite system, with infinite behavior. As it will be explain, the system involves a set of variables. Without more informations, the possible behavior of the system is described by a set of sets of streams, representing the successive values of the variables assigned by the system. %We will justify each definitions by an operation on streams that restrict the possible behavior of our system to a subclass of behaviors.
+%Two different visions of computation conflict at this point. Either we think of computer as a functional assignment 

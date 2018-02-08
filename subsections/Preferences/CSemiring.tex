@@ -1,0 +1,48 @@
+\begin{definition} (semiring)
+	A semiring is a non empty set $E$ on which operations of addition and multiplication have been defined such that:
+	\begin{list}{-}{ }
+		\item $(E,+)$ is a commutative monoid with identity element 0.
+		\item $(E,\times)$ is a monoid with identity element 1.
+		\item Multiplication distributes over addition from either sides.
+		\item $0 \times e = e \times 0 = 0$ for all $ e \in E$
+	\end{list} 
+	We note $\left\langle E, +, \times, \boldmath{1},\boldmath{0} \right\rangle$ to refer to this semiring.
+\end{definition}
+
+\begin{definition} (csemiring)
+	A csemiring is a semiring  $\left\langle E, +, \times, \boldmath{1},\boldmath{0} \right\rangle$ with additional properties :
+	\begin{list}{-}{ }
+		\item + is idempotent. We use the notation $\sum(A)$ in prefix notation to describe the sum of all elements of a possibly infinite set $A \subset E$.
+		\item $\times$ is commutative.
+		\item $1 + e = e + 1 = 1$ for all $ e \in E$
+	\end{list} 
+	A csemiring admits a partial order $\leq_{E}$, defined as the smallest relation satisfying :
+	$$
+	\frac{e,e' \in E \quad e+e' = e}{e \leq_{E} e'}
+	$$
+\end{definition}
+
+It is shown in [2] that $\leq$ satisfies the following properties:
+\begin{list}{-}{ }
+	\item $\leq$ is a partial order, with minimum 0 and maximum 1;
+	\item $x + y$ is the least upper bound of x and y;
+	\item $x \times y$ is a lower bound of x and y;
+	\item (S, $\leq $) is a complete lattice (i.e., the greatest lower bound exists);
+	\item + and $\times $ are monotone on $\leq$.
+	\item if $\times $ is idempotent, then + distributes over $\times $, $x \times y$ is the greatest lower bound of $x$ and $y$, and (S, $\leq $) is a distributive lattice.
+\end{list} 
+%\begin{definition} (c-semiring)
+%	A constraint semiring is a tuple $\left\langle \mathbb{E}, \bigvee, \otimes, \boldmath{1},\boldmath{0} \right\rangle$ where, for all $e\in E$, $E' \subset \mathbb{E}$, $\mathcal{E} \in 2^{\mathbb{E}}$, the following holds  :
+%	\begin{list}{-}{ }
+%		\item $\mathbb{E}$ is a set with $\boldmath{1},\boldmath{0} \in \mathbb{E}$
+%		\item $\otimes : \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{E}$ is a commutative and associative operator, with $\boldmath{0}_{\mathbb{E}} \otimes e = \boldmath{0}_{\mathbb{E}}$ and $\boldmath{1}_{\mathbb{E}} \otimes e = e$
+%		\item $\bigvee : 2^{\mathbb{E}} \rightarrow \mathbb{E}$ , with $\bigvee{\mathbb{E}}=\boldmath{1} $, $\bigvee{\emptyset}=\boldmath{0}$ and $\bigvee_{E \in \mathcal{E}}{(\bigvee{E})}= \bigvee{(\bigcup \{E | E \in \mathcal{E}\})}$
+%		\item $\otimes$ distributes over $\bigvee$ with $e \otimes \bigvee E = \bigvee \{ e \otimes e' | e' \in E \}$
+%	\end{list} 
+%	A c-semiring induces an order $\leq_{\mathbb{E}}$, defined as the smallest relation satisfying :
+%	$$
+%	\frac{e,e' \in \mathbb{E} \quad \bigvee\{e,e'\}=e}{e \leq_{\mathbb{E}} e'}
+%	$$
+%\end{definition}
+
+Intuitively, the $\times$ operator behaves as a composition operator for preferences. The $\sum$ can be seen as the choice of the best preference over a set of preferences, where $1$ is the highest preference and $0$ is the lowest. We give some well known instances of c-semirings.

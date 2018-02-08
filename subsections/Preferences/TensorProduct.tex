@@ -1,0 +1,34 @@
+For this section, we assume $E=\langle E, \times,+,1,0 \rangle$ and $F=\langle F, \times,+,1,0 \rangle$ two c-semirings. 
+
+\begin{definition} We define the disjoint union of two sets A and B while identifying elements of the intersection S:	
+	$$A \cup_{S}B = (A \uplus B)/\sim, \quad x \sim y \Leftrightarrow x=y,\quad \text{where } y\in S$$
+\end{definition}
+
+
+Free(X) is the smallest set such that :
+\begin{enumerate}
+	\item $X \subseteq Free(X)$
+	\item $x,y \in Free(X) \Rightarrow x \otimes y \in Free(X)$
+	\item $x,y \in Free(X) \Rightarrow x + y \in Free(X)$
+\end{enumerate}
+
+We define ${\equiv} \subset Free(X)^2$ as the smallest congruence with regard to $\otimes,+$:
+\begin{enumerate}
+	\item $x \otimes y \equiv y \otimes x$
+	\item $(x+x')\otimes y \equiv x \otimes y + x' \otimes y$
+	\item $x+x \equiv x$
+	\item $(x \otimes y) \otimes z \equiv x \otimes (y \otimes z)$
+\end{enumerate}
+
+
+\begin{definition} Given E,F csemiring and $\mathbb{B}$ the boolean csemiring, the tensor product  $E\otimes_{\mathbb{B}}F$ defined by the tuple $\langle Free(E \cup_{\mathbb{B}} F) /\equiv, +, \otimes, 0_{\mathbb{B}}, 1_{\mathbb{B}} \rangle $ is the co-product of E and F, where $0_{\mathbb{B}} \otimes a = 0_{\mathbb{B}}$, $1_{\mathbb{B}} + a = 1_{\mathbb{B}}$, $0_{\mathbb{B}} + a = a$ and $1_{\mathbb{B}} \otimes a = a$ for all $a \in E\otimes_{\mathbb{B}}F$
+\end{definition}
+
+
+%Since + is idempotent in a csemiring, the tensor product needs only be defined over a Boolean semiring. There exists a natural embedding of csemiring E and F into the tensor product $E \otimes_{\mathbb{B}} F$ with the maps $i_E : E \rightarrow E \otimes_{\mathbb{B}} F, e \longmapsto e $ and $i_F : F \rightarrow E \otimes_{\mathbb{B}} F, f \longmapsto f  $.
+%\begin{figure}[H]
+%	\centering
+%	\resizebox{8cm}{!}{\input{fig/coprod.tikz}}
+%	\caption{Coproduct universal property}
+%	\label{coprod}
+%\end{figure}

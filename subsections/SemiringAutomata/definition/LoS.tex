@@ -1,0 +1,13 @@
+%\begin{definition}
+	
+%	Given the language of constraint and a c-semiring $\mathbb{E} $, the syntax of a c-semiring formula $\phi_{\mathbb{E}}$ is as follows :
+%	$$ 		\phi := \quad e \quad | \quad \phi_1 \otimes \phi_2 \quad | \quad \phi_1 \oplus \phi_2 \quad | \quad R(t_1,...,t_n) \quad | \quad \exists x \phi \quad | \quad t_1 = t_2 	$$
+%	where $e \in \mathbb{E}$
+%\end{definition}
+
+\begin{definition} (Language of soft constraint) A term is defined as:
+	$$ t := \quad v \quad | \quad f(t_1, ..., t_n) \quad | \quad * $$
+	A soft constraint over a csemiring $\mathbb{E}$ is a formula $\phi$ defined by:
+	$$\phi := \quad e \quad | \quad \phi_1 \times \phi_2 \quad | \quad \phi_1 + \phi_2 \quad | \quad R(t_1,...,t_n) \quad | \quad \exists x \phi \quad | \quad t_1 = t_2 $$
+	We denote by V$_{\phi}$ the set of all free variables contained in a formula $\phi$, and by D the data domain of the variables.
+\end{definition}

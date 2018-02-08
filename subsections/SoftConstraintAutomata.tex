@@ -1,0 +1,34 @@
+\subsection{Soft Constraint Automata}
+
+\begin{definition}
+	Soft Constraint Automata (SCA) is a tuple $\left\langle Q, \rightarrow, C, \mathbb{S}, q_{0}, \right\rangle$ where : 
+	\begin{list}{-}{ }
+		\item $Q$ is a set of state and $q_0\in$ Q is the initial state.
+		\item C is a set of constraints.
+		\item $\rightarrow \subseteq Q \times C \times \mathbb{S} \times Q$ is a finite relation called transition relation. 
+		%A transition is denoted by $\left\langle q_i, c, s, p_i \right\rangle \in \rightarrow$
+	\end{list}
+\end{definition}
+
+\begin{example}
+	The automaton of Fig.2 represents the same 
+	\begin{figure}[H]
+		\centering
+		\resizebox{8cm}{!}{\input{fig/moveSCA.tikz}}
+		\caption{Soft constraint automata for moving}
+		\label{moveSCA}
+	\end{figure}
+\end{example}
+
+
+\begin{definition}
+	Given $A_1=\left\langle Q_1, \rightarrow_1, C_1,\mathbb{S}, q_{01} \right\rangle$ and $A_2=\left\langle Q_2, \rightarrow_2, C_2,\mathbb{S}, q_{02} \right\rangle$ two SCA, we define the product $ A_1 \times A_2 = \left \langle Q, \rightarrow, C,\mathbb{S}, (q_{01},q_{02}) \right \rangle$ where : 
+	\begin{list}{-}{ }
+		\item $Q= Q_1 \times Q_2 $ is a set of state and $(q_{01},q_{02})\in$ Q is the initial state.
+		\item The transition relation $\rightarrow$ is the smallest relation satisfying
+		$$
+		\frac{q_{01} \xrightarrow{c_1,e_1}_1 q_{01}' ,\quad q_{02} \xrightarrow{c_2,e_2}_2 q_{02}' }{(q_{01},q_{02}) \xrightarrow{c_1 \land c_2,e_1 \otimes e_2}(q_{01}',q_{02}')}
+		$$
+		%A transition is denoted by $\left\langle q_i, c, s, p_i \right\rangle \in \rightarrow$
+	\end{list}
+\end{definition}

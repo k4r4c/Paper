@@ -1,0 +1,79 @@
+\section{Some notions about constraint semiring}
+Semiring are a suitable mathematical structure to define the notion of preferences. A constraint semiring[] induces an order relation among its element. 
+\begin{definition} (c-semiring)
+	A constraint semiring is a tuple $\left\langle \mathbb{E}, \bigvee, \otimes, \boldmath{1},\boldmath{0} \right\rangle$ where, for all $e\in E$, $E' \subset \mathbb{E}$, $\mathcal{E} \in 2^{\mathbb{E}}$, the following holds  :
+		\begin{list}{-}{ }
+			\item $\mathbb{E}$ is a set with $\boldmath{1},\boldmath{0} \in \mathbb{E}$
+			\item $\otimes : \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{E}$ is a commutative and associative operator, with $\boldmath{0}_{\mathbb{E}} \otimes e = \boldmath{0}_{\mathbb{E}}$ and $\boldmath{1}_{\mathbb{E}} \otimes e = e$
+			\item $\bigvee : 2^{\mathbb{E}} \rightarrow \mathbb{E}$ , with $\bigvee{\mathbb{E}}=\boldmath{1} $, $\bigvee{\emptyset}=\boldmath{0}$ and $\bigvee_{E \in \mathcal{E}}{(\bigvee{E})}= \bigvee{(\bigcup \{E | E \in \mathcal{E}\})}$
+			\item $\otimes$ distributes over $\bigvee$ with $e \otimes \bigvee E = \bigvee \{ e \otimes e' | e' \in E \}$
+		\end{list} 
+	A c-semiring induces an order $\leq_{\mathbb{E}}$, defined as the smallest relation satisfying :
+		$$
+					\frac{e,e' \in \mathbb{E} \quad \bigvee\{e,e'\}=e}{e \leq_{\mathbb{E}} e'}
+		$$
+\end{definition}
+
+Intuitively, we can already understand the benefit of such structure to define preferences. Taking the same notation as the definition, a value of $\mathbb{E}$ is called a preference. The $\otimes$ operator is a composition operator between two preferences and defines a composed preference. $\bigvee$ is the choice operator among a set of preferences and gives the best preference according to the order relation.
+
+Two classical c-semirings are presented as examples:
+%\paragraph{Example}
+\begin{list}{-}{}
+	\item The Boolean semiring $\mathbb{B}$:
+		$$\left\langle \{\top,\bot\}, \lor, \land, \boldmath{0}_{\mathbb{B}}, \boldmath{1}_{\mathbb{B}} \right\rangle$$ where $\boldmath{0}_{\mathbb{B}}=\bot$ and $\boldmath{1}_{\mathbb{B}}=\top$
+	Remarque : boolean semiring is a structure for valuation of first order logic sentences.
+
+	\item The Weighted semiring $\mathbb{W}$ :
+		$$\left\langle \mathbb{N}\cup\{\infty\}, \min, \max, \boldmath{0}_{\mathbb{W}}, \boldmath{1}_{\mathbb{W}} \right\rangle$$ where $\boldmath{0}_{\mathbb{W}}=\infty$ and $\boldmath{1}_{\mathbb{B}}=0$	
+\end{list}
+
+
+
+%\begin{definition} (SCA table) 
+%	A SCA table consists of semiring in its column and assignment in its rows.
+%\end{definition}
+As we often use the same underlying c-semiring to model different concerns, it is useful to have a possibility of naming a c-semiring. The following c-semiring has the name $energy$ and a weighted underlying c-semiring.
+$$energy = \left\langle \mathbb{N}\cup\{\infty\}, \min, \max, \boldmath{0}_{\mathbb{W}}, \boldmath{1}_{\mathbb{W}} \right\rangle
+$$
+
+If nothing is specify, the name of the semiring is the name of its carrier set.
+%For the next definition, we identify a c-semiring $S_i$ with its name.
+
+\begin{definition} (label structure)
+	A label structure over a set of semiring name $\mathcal{N}$ is an injective function l : $\mathcal{N} \rightarrow \mathbb{N}$. 
+\end{definition}
+
+%\begin{definition} (type of composition)
+%	Given a label structure f over $\mathbb{S}=\{\mathbb{E},\mathbb{F}\} $, $\mathbb{E}$ and $\mathbb{F}$ are in lexicographic composition if $f(\mathbb{E})<f(\mathbb{F})$ and we note $\mathbb{F} \triangleright \mathbb{E} $. If $f(\mathbb{E})=f(\mathbb{F})$, $\mathbb{E}$ and $\mathbb{F}$ are in join composition and we note $\mathbb{E} \odot \mathbb{F}$.
+%\end{definition}
+
+%\begin{definition} (lexicographic operator) 
+%	Given two c-semiring $\mathbb{E}$ and $\mathbb{F}$, we define the lexicographic composition $\mathbb{E} \triangleright \mathbb{F}$ as :
+%\end{definition}
+Given a set of c-semiring names S, a label structure $l$ over S, $s_1,s_2 \in S$, we say that $s_1$ is in lexicographic composition with $s_2$ if $l(s_1)<l(s_2)$. If $l(s_1)=l(s_2)$, $s_1$ and $s_2$ are in joint composition.
+
+\begin{definition} (composite c-semiring) 
+	Given n c-semiring $S_i = \left\langle \mathbb{E}_i, \bigvee_i, \otimes_i, \boldmath{1}_i,\boldmath{0}_i \right\rangle $ for $i = 1,..,n$, and a label structure l over $\cup_i\{S_i\} $, let us define the structure of the composite semiring as $S = \left\langle \mathbb{E}, \bigvee_l, \otimes_l, \boldmath{1},\boldmath{0} \right\rangle$ where : 
+	\begin{list}{-}{ }
+		%		\item $\mathbb{E} = \left\langle \{\mathbb{E}_1, .., \mathbb{E}_n \}, \leq \right\rangle$
+		\item\normalfont $\mathbb{E} = \mathbb{E}_1 \times ... \times \mathbb{E}_n$ with $0 = <0_1,...,0_n> $ and $1 = <1_1,...,1_n> $. Given $e=<e_1,...,e_n>, e'=<e'_1, ..., e'_n> \in \mathbb{E}$,
+		
+		\item\normalfont $e\otimes_l e' = <e_1\otimes_{1,l} e_1', ..., e_n \otimes_{n,l} e'_n>$ where : $$e_i \otimes_{i,l} e'_i = \begin{cases}
+		0_{i} & \text{if there exists } j \text{ such that } e_j \otimes_{j} e'_j = 0_j \quad \text{and } l(S_i) \leq l(S_j)\\
+%		0_{i} & \text{if there exists } j \text{ such that } e_j \otimes_{j} e'_j \in \overline{\mathcal{C}}(\mathbb{E}_j) \quad \text{and } l(S_i) < l(S_j)\\
+		e_i \otimes_i e'_i & \text{otherwise }  
+		\end{cases} $$
+		\item $\bigvee_l\{e,e'\} = <\bigvee_{1,l} \{e_1,e_1'\}, ..., \bigvee_{n,l}\{e_n,e'_n\} >$ where, given $s_k \in \{e_k,e'_k\}$ :
+		$$\bigvee_{i,l}\{e_i,e_i'\} = \bigvee_i\{e\in \{e_i,e_i'\} | \left \langle s_1, ..., e, ..., \bigvee_j \{e_j,e_j'\}, ..., s_n \right \rangle \in E \text{, }  l(S_i)<l(S_j) \}$$
+%		$$\bigvee_l\{e_i,e_i} \in Pr_i(E) | \left \langle e_1, ..., e_i, ..., \bigvee_j \{Pr_j(E)\}, ..., e_n \right \rangle \in E, e_k \in Pr_k(E) \}$$
+	\end{list}
+\end{definition}
+
+Remarks : is $S$ a c-semiring ?
+
+%\begin{proposition} The composed semiring defined previously is a c-semiring.
+%\end{proposition}
+%\begin{proof}
+%	By definition of the composition operator, it is associative and commutative. Moreover, given $e \in \mathbb{E} $:
+%		$$		e \otimes_l 1_{\mathbb{E}} = <		$$
+%\end{proof}

@@ -1,0 +1,399 @@
+\RequirePackage{amsmath}
+\documentclass[runningheads]{llncs}
+
+\usepackage{amssymb}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{stmaryrd}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{courier}
+\usepackage{xspace}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\xqed[1]{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill\quad\hbox{#1}}
+\newcommand\EOE{\xqed{$\clubsuit$}}
+\newcommand\EOP{\xqed{$\square$}}
+
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\sem}[1]{\ensuremath{\llbracket #1 \rrbracket}}
+\renewcommand{\L}{{\cal L}}
+\newcommand{\tc}{T_{\rm c\lca}}
+\newcommand{\no}{{\tt null}}
+\newcommand{\m}{\underline{m}}
+\newcommand{\n}{\underline{n}}
+\newcommand{\free}{\operatorname{free}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\C}{{\cal C}}
+\newcommand{\D}{{\cal D}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\W}{\mathbb{W}}
+
+\newcommand{\defn}[1]{Definition~\ref{defn:#1}}
+\newcommand{\fig}[2][]{Figure~\ref{fig:#2}\ensuremath{#1}}
+\newcommand{\tab}[1]{Table~\ref{tab:#1}}
+\newcommand{\eq}[1]{(\ref{eqn:#1})}
+\newcommand{\ex}[1]{Example~\ref{ex:#1}}
+\newcommand{\secn}[1]{Section~\ref{sec:#1}}
+\newcommand{\lem}[1]{Lemma~\ref{lem:#1}}
+\newcommand{\cor}[1]{Corollary~\ref{cor:#1}}
+\newcommand{\thm}[1]{Theorem~\ref{thm:#1}}
+\newcommand{\prop}[1]{Proposition~\ref{prop:#1}}
+
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\eg}{\emph{e.g.}, \xspace}
+
+%% I changed the symbols to 0,1,+,* to avoid confusion with the meet and join from lattices.
+\newcommand{\cbot}{0}
+\newcommand{\ctop}{1}
+\newcommand{\ctimes}{\times}
+\newcommand{\cplus}{+}
+\newcommand{\CS}{{\bf CS}}
+\newcommand{\ls}{{\cal L}_{\rm *}}
+\newcommand{\lsc}{{\cal L}_{\rm E}}
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
+ { #1 \,\delimsize| \,\mathopen{} #2 }
+
+\title{Composition of Soft Constraints}
+\author{Kasper Dokter\inst{1} \and Benjamin Lion\inst{1} \and Francesco Santini\inst{2}
+\institute{Centrum Wiskunde \& Informatica, Amsterdam, Netherlands 
+\and Dipartimento di Matematica e Informatica, University of Perugia, Italy}
+}
+\titlerunning{Composition of Soft Constraints}
+\authorrunning{Dokter, Lion, and Santini}
+
+\begin{document}
+
+\maketitle
+
+\pagestyle{headings} 
+
+\begin{abstract}
+Soft constraint automata extend constraint automata by associating to each action a preference value from a constraint semiring. Such formal and parametric approach can be used to reason according to different metrics of costs.
+Composition of soft constraint automata
+\end{abstract}
+
+%%%
+%%% Introduction
+%%%
+\section{Introduction}
+\label{sec:intro}
+
+
+%Preferences are used to turn non-deterministic choices into deterministic decision. Stating some local preferences on small systems should resolve, after composition, to a larger system completely determined by the composition of preferences. Semiring are very powerful to express different sort of preferences, and compose between values of the same semiring. However, composition between different semiring raise a problem that is partially solved using homomorphism.
+
+In this paper, we represent soft constraint automata as logical expressions, called {\em soft constraint predicates}, that evaluate to a value from a c-semiring.
+We use this c-semiring value to define a preference.
+
+
+The compact form of logical expressions makes them very useful for tool like compilers.
+There is no state/transition space explosion. 
+
+We define a generic composition operator on soft constraint predicates over possibly different c-semirings.
+The main idea is to use a (quotient of the) coproduct in the category of c-semirings.
+By construction, a coproduct admits embeddings from its constituent c-semirings.
+This allows us to change the c-semiring of each constituent soft constraint predicate via c-semiring homomorphisms \cite{LY08}.
+
+
+
+Soft constraint automata are introduced by Arbab and Santini in \cite{AS12}, where a first formalization and SCA composition has been defined.
+In the following, different tools based on SCAs have been developed, for instance in \cite{SSAA13} a value represents the distance from two SCA, one representing a behavioural-based query and the other SCA the behaviour of a Web service.
+
+Gaducci et al. \cite{GHMW13}
+
+We provide an alternative definition of a lexicographic composition of c-semirings as a quotient of the coproduct. 
+The advantage of our new definition over the existing one is that, without any side condition, the constituent c-semirings embed into the new lexicographical product, while this is not always possible for the existing lexicographic composition.
+
+We exploit the fact that such embeddings exist to transform 
+
+
+%%%
+%%% C-semirings
+%%%
+\section{C-semirings}
+\label{sec:csemirings}
+%In practice, c-semirings are \emph{commutative} ($\ctimes$ is commutative) and \emph{idempotent} semirings (\ie $\cplus$ is idempotent), where $\cplus$ defines a complete lattice: every subset of elements have a \emph{least upper bound}, or \emph{lub}, and a \emph{greatest lower bound}, or \emph{glb}. In fact, c-semirings are semirings where $\cplus$ is used as a preference operator, while $\ctimes$ is used to compose preference-values together.
+
+% @Francesco: every c-semiring is absorptive, since x+(x*y) = (x*1)+(x*y) = x*(1+y) = x*1 = x
+%If $\forall s,t \in S. s\cplus(s\ctimes t) = s$, the semiring is said to be absorptive. In short, c-semirings are defined as non-trivial commutative and absorptive semirings.
+
+A {\em c-semiring}~\cite{BMR97} is a tuple $(A, \cplus, \ctimes, \cbot, \ctop)$ such that
+\begin{enumerate}
+    \item $A$ is a carrier set that contains two element $\cbot, \ctop \in A$;
+    \item $\cplus$ is a commutative associative idempotent binary operator, with unit element $\cbot$ and absorbing element $\ctop$;
+    \item $\ctimes$ is a commutative associative binary operator that distributes over $\cplus$, with unit element $\ctop$, and absorbing element $\cbot$.
+\end{enumerate}
+Well-known instances of c-semirings are the 
+\begin{itemize}
+\item {\em boolean} c-semiring $\B = (\{0, 1\}, \min, \max, 0, 1)$;
+\item {\em fuzzy} c-semiring $\F= ([0,1],\min, \max, 0, 1)$ ;
+\item {\em bottleneck} c-semiring $\K = (\mathbb{R}_{\geq} \cup \{\infty\}, \max, \min, 0, \infty)$;
+\item {\em probabilistic} or {\em Viterbi} c-semiring $\V = ([0,1], \max, \times, 0, 1)$; 
+\item {\em weighted} c-semiring $\W = (\mathbb{R}_{\geq} \cup\{\infty\}, \min, +, \infty, 0).$
+\end{itemize}
+%Boolean c-semirings can be used to model crisp problems.
+
+Every c-semiring admits a order $\leq$ defined by $r \leq s$ iff $r \cplus s = s$.
+It is shown in \cite{BMR97} that $\leq$ satisfies the following properties:
+
+\begin{enumerate}
+    \item $\leq$ is a partial order, with minimum $\cbot$ and maximum $\ctop$; 
+    \item $x \cplus y$ is the least upper bound of $x$ and $y$;
+    \item $x \ctimes y$ is a lower bound of $x$ and $y$;
+    \item $(S,\leq)$ is a complete lattice (i.e., the greatest lower bound exists);
+    \item $\cplus$ and $\ctimes$ are monotone on $\leq$.
+    \item if $\ctimes$ is idempotent, then $\cplus$ distributes over $\ctimes$, $x \ctimes y$ is the greatest lower bound of $x$ and $y$, and $(S,\leq)$ is a distributive lattice.
+\end{enumerate}
+
+A {\em morphim} of c-semirings is a map $h$ such that $h(0) = 0$, $h(1) = 1$, $h(x \cplus y) = h(x) \cplus h(y)$, and $h(x \ctimes y) = h(x) \ctimes h(y)$.
+C-semirings and c-semiring homomorphisms form a category $\CS$ of c-semirings.
+
+Given two c-semirings $S_i = (A_i, \cplus_i, \ctimes_i, \cbot_i, \ctop_i)$, for $i=0,1$.
+Their product $S_0 \times S_1$ is defined by $(A_0 \times A_1, \cplus, \ctimes, (0_0, 0_1), (1_0,1_1))$, where $(x_0,x_1) \cplus (y_0,y_1) = (x_0 \cplus_0 y_0, x_1 \cplus_1 y_1)$ and $(x_0,x_1) \ctimes (y_0,y_1) = (x_0 \ctimes_0 y_0, x_1 \ctimes_1 y_1)$.
+
+An ideal of a c-semiring $S = (A, \cplus, \ctimes, \cbot, \ctop)$ is a subset $I \subseteq A$ such that $0 \in I$, $x \cplus y \in I$ and $a \ctimes x \in I$, for all $x,y \in I$ and $a \in A$.
+An ideal defines an relation $\sim$ on $A$ via $x \sim y$ if and only if $x+i_x = y + i_y$, for some $i_x,i_y \in I$. 
+It can be shown that $\sim$ is a congruence relation with respect to $\cplus$ and $\ctimes$, which shows that $\cplus$ and $\ctimes$ define a c-semiring structure on 
+A quotient $S/I = \{ A / {\sim},  \}$
+
+The direct sum $S_0 \oplus S_1$ defined by $S_0 \times S_1$ consists of all linear combinations of elements form $S_0$ and $S_1$
+
+Their coproduct $S_0 \cup S_1$ is defined by $\mathbb{B} \oplus S_0 \oplus S_1 \oplus S_0 \otimes_\mathbb{B} S_1$ modulo the equations $x + 1 = 1$ and $x \otimes 0 = 0$, for all $x \in E_0 \sqcup E_1$. 
+
+
+
+\subsection{Soft constraint automata}
+\label{sec:sca}
+
+We briefly recall some basic definitions on soft constraint automata.
+
+\begin{definition}
+	\label{defn:sca}
+	A Soft Constraint Automaton (SCA) is a tuple ($Q$,$C$,$\mathbb{E}$,$\rightarrow$,$q^{0}$,t) such that:
+	
+\begin{itemize}
+    \item $Q$ is a set of state, with $q^0 \in Q$; 
+    \item $C$ is a set of boolean constraints;
+    \item $x \ctimes y$ is a lower bound of $x$ and $y$;
+    \item $(S,\leq)$ is a complete lattice (i.e., the greatest lower bound exists);
+    \item $\cplus$ and $\ctimes$ are monotone on $\leq$.
+    \item if $\ctimes$ is idempotent, then $\cplus$ distributes over $\ctimes$, $x \ctimes y$ is the greatest lower bound of $x$ and $y$, and $(S,\leq)$ is a distributive lattice.
+\end{itemize}
+
+\end{definition}
+
+I think that the category of non-trivial ($0 \neq 1$) c-semirings is abelian, with the boolean c-semiring as zero object.
+Every product of c-semirings is therefore also a coproduct.
+
+
+%%%
+%%% Soft Constraints Predicates
+%%%
+\section{Soft Constraint Predicates}
+\label{sec:predicates}
+%The current approach to design a constraint system is to write a constraint automata
+%A general approach to represent constraint system is using a state-transition representation. Intuitively, a state represent a configuration of the system, and the transitions the updates. A state-transition representation could be problematic in certain cases.
+Defining constraint predicate and c-semiring are usually orthogonal problems. In Soft Constraint Automata, boolean constraints and c-semiring are separately defined and assigned to each transition. Conceptually, we could find some justifications for this separation : the system should first look at the enable transitions (which boolean constraint is true) and chose the best transition (regarding semiring value). Enabling and ordering are two different concerns. 
+
+The problem is more practical, and arises during composition. Due to the separation between constraint and c-semiring, the composition operator must differentiate both concerns. In this section, we propose a unified formal model to express both constraint and c-semiring as a soft constraint predicate. Intuitively, a soft constraint predicate is the composition of a c-semiring value from boolean semiring (e.g. the constraint), composed with another c-semiring value (e.g. the semiring value). A new composition operator is lately presented. 
+
+%%% Language of soft constraints
+\subsection{Language of soft constraints}
+\label{sec:lang}
+\begin{definition}{(Language)}
+ The language of soft constraints $\lsc$ is the language of constraints defined as : 
+\end{definition}
+
+\begin{definition}{(Predicate)}
+	With L the language of soft constraint, the syntax of a soft constraint predicate (SCP) $\phi_{\mathbb{E}}$ is as follows : 
+	$$\phi_{\mathbb{E}}:= \quad e \quad | \quad t_1=t_2 \quad |\quad R(t_1, .. ,t_n) \quad | \quad \phi_1 \rightarrow \phi_2 \quad | \quad \exists x \phi \quad  $$ where $e \in \mathbb{E}$ with $\mathbb{E}$ a c-semiring. Because $\mathbb{E}$ is a lattice, we identify $1_\mathbb{E}=\top$ and $0_\mathbb{E}=\bot$.
+\end{definition}
+
+From definition 2, we can derive the definition of other basic logical operators.
+\begin{itemize}
+    \item Negation:  $$\neg \phi = \neg \phi \lor \bot = \phi \rightarrow \bot $$
+    \item Conjunction: $$\phi \land \psi = \neg (\neg \phi \lor \neg \psi) = \neg (\phi \rightarrow \neg \psi) $$
+\end{itemize}
+
+
+\begin{definition}{(Modus Ponens)}
+$\phi$ and $\psi$ two SCPs. The following holds :
+
+$$\begin{array}{rl}
+    & \phi, \quad \phi \to \psi \\
+    \cline{2-2}
+    & \quad \quad \psi
+  \end{array}$$
+\end{definition}
+
+\begin{definition}{(Interpretation of predicates)} For a closed SCP $\phi_{\mathbb{E}} \in \Phi_\mathbb{E}$, by induction on $\phi_{\mathbb{E}}$ we define the function $\llbracket . \rrbracket : \Phi_\mathbb{E} \rightarrow \mathbb{E}$ that compute the semantic of $\phi_{\mathbb{E}}$ as : 
+\begin{align*}
+\llbracket e \rrbracket =  & \quad e \in \mathbb{E} \\
+\llbracket t_1=t_2 \rrbracket =  & \quad 1_\mathbb{E} \quad |\quad 0_\mathbb{E} \quad \in \mathbb{E} \\
+\llbracket R(t_1,...,t_n) \rrbracket =  & \quad 1_\mathbb{E} \quad |\quad 0_\mathbb{E} \quad \in \mathbb{E} \\
+\llbracket \phi \rightarrow \psi \rrbracket =  & \sideset{}{_\mathbb{E}}\bigoplus \bigl\{ c \in \mathbb{E} \mid c \otimes_\mathbb{E} \llbracket \phi \rrbracket  \leqslant \llbracket  \psi \rrbracket  \bigr\} \\
+\end{align*}
+where $\sideset{}{_\mathbb{E}}\bigoplus$ is the greatest lower bound operator on $\mathbb{E}$ and $\otimes_\mathbb{E}$ the product operator of the c-semiring. 
+%\[ \Set*{ x }{ x>0 } \]
+\end{definition}
+
+Example with the boolean c-semiring $\B = (\{0, 1\}, \min, \max, 0, 1)$. If we note $\Phi_\mathbb{B}$ the set of all formula defined as written in definition 3 :
+\begin{align*}
+\llbracket \top \rightarrow \top \rrbracket =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} \llbracket \top \rrbracket  \leqslant \llbracket  \top \rrbracket  \bigr\} \\
+										    =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} 1_\mathbb{B}  \leqslant 1_\mathbb{B}  \bigr\} \\
+										    =	& 1_\mathbb{B} 
+\end{align*}
+
+\begin{align*}
+\llbracket \top \rightarrow \bot \rrbracket =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} \llbracket \top \rrbracket  \leqslant \llbracket  \bot \rrbracket  \bigr\} \\
+										    =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} 1_\mathbb{B}  \leqslant 0_\mathbb{B}  \bigr\} \\
+										    =	& 0_\mathbb{B} 
+\end{align*}
+
+\begin{align*}
+\llbracket \bot \rightarrow \top \rrbracket =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} \llbracket \bot \rrbracket  \leqslant \llbracket  \top \rrbracket  \bigr\} \\
+										    =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} 0_\mathbb{B}  \leqslant 1_\mathbb{B}  \bigr\} \\
+										    =	& 1_\mathbb{B} 
+\end{align*}
+
+\begin{align*}
+\llbracket \bot \rightarrow \bot \rrbracket =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} \llbracket \bot \rrbracket  \leqslant \llbracket  \bot \rrbracket  \bigr\} \\
+										    =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} 0_\mathbb{B}  \leqslant 0_\mathbb{B}  \bigr\} \\
+										    =	& 1_\mathbb{B} 
+\end{align*}
+
+\begin{align*}
+\llbracket \neg \psi \rrbracket =  & \llbracket \psi \rightarrow \bot \rrbracket \\
+							    =  & \sideset{}{_\mathbb{B}}\bigoplus \bigl\{ c \in \mathbb{B} \mid c \otimes_\mathbb{B} \llbracket \psi \rrbracket \leqslant 0_\mathbb{B}  \bigr\} \\
+										    =	& 1_\mathbb{B} - \llbracket \psi \rrbracket
+\end{align*}
+
+
+%Let's remark that $\phi(A)$ can be interpreted as a semiring value : 
+
+$\top=0_\mathbb{W}$
+$\bot=\infty_\mathbb{W}$
+\textbf{Semantics.}The semantic is defined by $\llbracket . \rrbracket$ as follow : \\
+
+%$$\frac{e \in L}{\llbracket e \rrbracket \in \mathbb{E}} \quad \quad \frac{e \in L}{\llbracket e \rrbracket \in \mathbb{E}}$$
+%$$\frac{e \in L}{\llbracket e \rrbracket \in \mathbb{E}} \quad \quad \frac{e \in L}{\llbracket e \rrbracket \in \mathbb{E}}$$
+
+\begin{align*}
+\llbracket e \rrbracket =  & \quad e \in \mathbb{E} \\
+\llbracket t_1=t_2 \rrbracket =  & \quad 1_\mathbb{B} \quad |\quad 0_\mathbb{B} \quad \in \mathbb{B} \\
+\llbracket \phi \land \psi \rrbracket =  & \quad \llbracket \phi \rrbracket  \otimes \llbracket \psi \rrbracket \\
+\llbracket \phi \lor \psi \rrbracket =  & \quad \llbracket \phi \rrbracket  \oplus \llbracket \psi \rrbracket \\
+\llbracket \neg \phi \rrbracket =  & \quad 1_\mathbb{B} - \llbracket \phi \rrbracket \quad  \text{if $\phi$ has a binary semiring valuation}
+\end{align*}
+
+%%% Composition of constraint semirings
+\subsection{Composition of constraint semirings}
+\label{sec:semiringcomposition}
+
+\begin{definition}
+	\label{defn:coproduct}
+	The coproduct $E_0 \sqcup E_1$ of two c-semirings $E_0$ and $E_1$ is defined by $\mathbb{B} \oplus E_0 \oplus E_1 \oplus E_0 \otimes_\mathbb{B} E_1$ modulo the equations $x + 1 = 1$ and $x \otimes 0 = 0$, for all $x \in E_0 \sqcup E_1$. 
+\end{definition}
+
+
+The main idea is to use quotients of the coproduct as composition operators.
+The advantage is that by definition we have morphisms form each constituent semiring into their product.
+
+One example of a product is the lexicographical product:
+
+\begin{definition}
+	\label{defn:lexico}
+	The lexicographical composition of two c-semirings $E_0$ and $E_1$ is $E_0 \sqcup E_1$ modulo the equations 
+	$$x_0 \otimes {\bf 1}_1 + y_0 \otimes {\bf 0}_1 = y_0 \otimes {\bf 0}_1,$$ 
+	for all $x_0,y_0 \in E_0$ that satisfy $x_0 +_0 y_0 = y_0$.
+\end{definition}
+
+The distributive law lifts the partial order of each component to the coproduct.
+Indeed $x + y = y$ implies $x \otimes z + y \otimes z = y \otimes z$.
+In this way, we obtain an order on the coproduct that relates elements that share at least one component.
+The rule in \defn{lexico} extends the order relation on the coproduct by stipulating that the largest element with $x_0$ in the first component ($x_0 \otimes {\bf 1}_1$) is smaller that the smallest element with $y_0 \geq x_0$ in the first component $(y_0 \otimes {\bf 0}_1)$.
+
+Our lexicographical product of c-semirings in \defn{lexico} can be viewed as an generalization of the product defined by Gaducci et al. in \cite{GHMW13}.
+
+
+\subsection{Composition of soft constraint predicates}
+\label{sec:predicatecomposition}
+
+\begin{definition}
+\label{defn:composition}
+The composition of soft constraint predicates $\phi_0/E_0$ and $\phi_1/E_1$ is $\phi_0 \wedge \phi_1 / E$, where $E$ is any coproduct of $E_0$ and $E_1$.
+\end{definition}
+
+
+\subsection{Restriction}
+\label{sec:restriction}
+
+We define a restriction operator on soft constraint automata via {\em projection} $\Downarrow$ of a constraint satisfaction problem onto a subset of its variables.
+
+Let $c \in \C$ be a constraint and $v \in V$ a variable. The {\em
+projection} of $c$ over $V-\{v\}$, written $c\Downarrow_{(V-\{v\})}$,
+is the constraint $c'$ such that $c'\eta = \sum_{d \in D} c \eta
+[v:=d]$.
+
+
+
+
+
+%%%
+%%% Related work
+%%%
+\section{Related work}
+\label{sec:related}
+
+Definition of lexicographic product of \cite{GHMW13}.
+
+Kapp\'{e}, Arbab and Talcott defined the product of soft constraint automata over composed semirings, such as the lexicographical product \cite{KAT16}.
+
+By definition, every c-semiring homomorphism $h$ is order-preserving in the sense that $x \leq y$ implies $h(x) \leq h(y)$.
+The opposite, $h(x) \leq h(y)$ implies $x \leq y$, is not not always the case, and in this case $h$ is called order-reflecting \cite{LY08}.  
+
+In \cite{LY08} the authors propose an abstraction scheme for soft constraints that uses semiring homomorphism. To find optimal solutions of a SCSP, they first work in the abstract problem and find its optimal solutions, and then use them to solve the concrete problem. In particular, it is shown that a mapping preserves optimal solutions if and only if it is an order-reflecting semiring homomorphism
+
+We refer to \cite{Golan13} for a detailed introduction into semirings.
+
+
+Semirings are more appropriate then valued structures~\cite{BMRSVF99}, since valued structures 
+
+
+%%%
+%%% Conclusion
+%%%
+\section{Conclusion}\label{sec:conclusion}
+The main results presented in this paper consists in a 
+
+
+%%%
+%%% References
+%%%s
+\bibliographystyle{splncs03} 
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,10 @@
+\begin{definition} (Language of constraint) A term is defined as:
+	$$ t := \quad v \quad | \quad f(t_1, ..., t_n) \quad | \quad * $$
+	A constraint is a formula $\phi$ defined by:
+	$$ \phi := \quad \bot \quad |\quad t_1 = t_2 \quad|\quad R(t_1, ... , t_n) \quad|\quad \phi_1 \land \phi_2 \quad| \quad \neg \phi \quad| \quad \exists x \phi $$
+	We denote by V$_{\phi}$ the set of all free variables contain in a formula $\phi$, and by D the data domain of the variables.
+\end{definition}
+
+%At this point, we are aware that first-order logic is undecidable, meaning a sound, complete and terminating decision algorithm for provability is impossible. However, taking a general definition allows later on a restriction to a certain FOL fragment. 
+
+Terms are either variables, functions or special symbol *. Intuitively, we can see variables' value as data acquisition of sensors. Variables are defined over a data domain D, and the absence of data is represented by the symbol *. A formula $\phi$, represents the constraint over the set of variable $V_{\phi}$. We say that $\phi$ is satisfiable if there exists an assignment $\delta : V_{\phi}\rightarrow D$ such that $\delta \models \phi$. Composition of two constraints $c_1$ and $c_2$ is written as the conjunction $c_1 \land c_2$. If two constraints have disjoint variables, then the composition is satisfiable if and only if the two composite constraints are satisfiable. If the set of variable of two constraints intersect, satisfiability can no more be deduced from the satisfiability of composite constraints.

@@ -1,0 +1,13 @@
+ \begin{tikzpicture}[>=latex,shorten >=1pt,node distance=3cm,on grid,auto, node/.style={circle,draw,minimum size=25pt}, ]
+
+ \node[state] (B) at (80pt,0pt) {$s_1$};
+
+ \node[state] (A) at (0pt,0pt) {$s_0$};
+ \draw[<-] (A) -- node[above left] {} ++(-1,0);
+ \draw[->] (B) to[out=20,in=-20,looseness=8] node[right, align=left] {pass, 1} (B);
+ \draw[->] (A) to[out=20,in=160,looseness=1] node[above] {snapshot, 0} (B);
+ \draw[->] (B) to[out=200,in=-20,looseness=1] node[below] {move, 0} (A);
+ \draw[->] (A) to[out=70,in=110,looseness=8] node[above left, align=left] {move, 2 \\ pass, 0} (A);
+
+
+ \end{tikzpicture}

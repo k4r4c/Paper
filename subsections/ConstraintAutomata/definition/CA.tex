@@ -1,0 +1,20 @@
+
+\begin{definition}
+	A Constraint Automaton is a tuple $\left\langle Q, \rightarrow, C, q_{0}, \right\rangle$ where: 
+	\begin{list}{-}{ }
+		\item Q is a set of state and $q_0\in$ Q is the initial state.
+%		\item C is a set of constraints, where a constraint is a predicate $c: (V_c \rightarrow D) \rightarrow \{\top,\bot\}$.
+		\item C is a set of constraints.
+		\item ${\rightarrow} \subseteq Q \times C \times Q$ is a finite relation called transition relation.
+	\end{list}
+		The tuple $(q,c,q') \in \rightarrow$ represents a transition from state q to state q' subject to the constraint c. We write $q \xrightarrow{c} q'$ instead of $(q,c,q') \in \rightarrow$. If c $\equiv \bot$, we can drop $q \xrightarrow{c} q'$ from $\rightarrow$.
+\end{definition}
+
+At this point, we should explain the behavior of a Constraint Automata $\mathcal{A}$. Before being able to do so, we must introduce a new notion. We call $\Gamma : V \rightarrow D\cup\{*\}$ the assignment map defined on the set of all free variables of $\mathcal{A}$. Given $v \in V$, $\Gamma(v)$ is either the symbol $*$ or a value from the domain $D$. We say that $v$ is undefined if $\Gamma(v)=*$. Otherwise, $\Gamma(v) \in D$ is a value of the free variable v.
+Note that the context carried by $\Gamma$ can be modified either by a local assignment (a constraint of the shape $v=d$ where $d\in D$).
+%Note that there is two kinds of variables $v$ : local or externally, by the environment (explained later, after defining composition). If, $\Gamma(v)=*$ and the taken transition contains an equality $v=d$ where $d \in D $, then the map $\Gamma$ is updated such that $\Gamma(v)=d$ (the value d is assigned to v). 
+%Since variables could be shared between constraints, updating a variable in a transition the environment assigns a value to the variable. either the constraint on a transition contains an equality $v=d$ where $d \in D$, or the environment on a state fixes a value for $v$ (for instance, reading acquisition from a sensor). We define as interface the set of variable modifiable by the environment.
+
+It is now possible to express the behavior of the automaton in terms of sequence of constraints. Starting in the initial state $q_0$ with an assignment map $\Gamma$, all outgoing transition are evaluated within $\Gamma$ : for all free variable $v$ such that $\Gamma(v) \not = *$, we substitute the value $\Gamma(v)$ for $v$ in the constraint. We then get a set of outgoing transitions whose constraints are satisfiable by $\Gamma$. We choose one constraint non deterministically, and update the assignment map $\Gamma$. We repeat this procedure in the next states.
+
+

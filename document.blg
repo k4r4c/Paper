@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/dev/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: document.aux
+The style file: plain.bst
+Database file #1: ../Bib/mybib.bib
+A bad cross reference---entry "KAT17"
+refers to entry "DBLP:conf/facs2/2017", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/facs2/2017"
+Warning--can't use both author and editor fields in Arbab2013
+Warning--empty journal in KAT17
+You've used 3 entries,
+            2118 wiz_defined-function locations,
+            522 strings with 4739 characters,
+and the built_in function-call counts, 1101 in all, are:
+= -- 109
+> -- 38
+< -- 2
++ -- 16
+- -- 12
+* -- 63
+:= -- 172
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 13
+chr.to.int$ -- 0
+cite$ -- 5
+duplicate$ -- 52
+empty$ -- 90
+format.name$ -- 12
+if$ -- 242
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 5
+newline$ -- 18
+num.names$ -- 6
+pop$ -- 24
+preamble$ -- 1
+purify$ -- 12
+quote$ -- 0
+skip$ -- 41
+stack$ -- 0
+substring$ -- 72
+swap$ -- 19
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 2
+while$ -- 12
+width$ -- 4
+write$ -- 34
+(There was 1 error message)

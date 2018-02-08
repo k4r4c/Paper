@@ -1,0 +1,3 @@
+\begin{example}
+	We consider three constraints $east := x \not =* \land y=* $, $west := y \not = * \land x=* $ and $charge := c \not = * $, where x, y and c are three variables. We can imagine that the name of the constraints $east$, $west$ and $charge$ reflects to the actual behavior of our system : having the constraint $east$ true results in the $east$ behavior (respectively with $west$ and $charge$). Since $V_{east} \cap V_{charge} = \emptyset$, if $east$ is satisfiable and $charge$ is satisfiable, then $east \land charge$ is also satisfiable. Looking at the composition of $east$ and $west$, the intersection $V_{east} \cap V_{west} \not= \emptyset$ and, in this case, the composed constraint is not satisfiable. 
+\end{example}
