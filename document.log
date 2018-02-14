@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2017.4.2)  14 FEB 2018 17:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2017.4.2)  14 FEB 2018 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -774,174 +774,42 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-(./sections/Title.tex
-LaTeX Font Info:    Try loading font information for U+msa on input line 15.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(./sections/Components.tex
+LaTeX Font Info:    Try loading font information for U+msa on input line 1.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 15.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+LaTeX Font Info:    Try loading font information for U+msb on input line 1.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 15.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 1.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stmaryrd/Ustmry.fd))
-(./sections/Intro.tex
-Overfull \hbox (0.65485pt too wide) in paragraph at lines 5--6
-[]\OT1/cmr/m/n/10 Until now, sev-eral com-po-si-tion op-er-a-tors have been de-
-fined (ex: lex-i-co-graphic,
- []
+(./sections/SCA.tex) (./sections/Streams.tex) (./sections/Coproduct.tex)
+(./sections/Simplification.tex) (./document.bbl [1
 
-) (./sections/CSemiring.tex [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: Citation `bibid' on page 2 undefined on input line 13.
-
-
-LaTeX Warning: Citation `bibid' on page 2 undefined on input line 13.
-
-(./subsections/Preferences/Intro.tex [2]
-Overfull \hbox (7.19249pt too wide) in paragraph at lines 26--27
-\OT1/cmr/m/n/10 ni-tion, the com-posed be-hav-ior are $\OMS/cmsy/m/n/10 h\OT1/c
-mr/m/n/10 ((\OML/cmm/m/it/10 west; snap\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1
-/cmr/m/n/10 (2\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/
-n/10 5))\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 ((\OML/cmm/m/it/10 east; snap\OT1/cm
-r/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (5\OML/cmm/m/it/10 ; \OT1/cmr/m/n/
-10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 5))\OMS/cmsy/m/n/10 i[]$
- []
-
-) (./subsections/Preferences/CSemiring.tex
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 9.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 9.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 9.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 9.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 13.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 13.
-
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 13.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 13.
-
-
-[3]) (./subsections/Preferences/Examples.tex
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 4.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 4.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 4.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 4.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 4.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 4.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 4.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 4.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 6.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 6.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 6.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 6.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 6.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 6.
-
-
-LaTeX Font Warning: Command \boldmath invalid in math mode on input line 6.
-
-
-LaTeX Font Warning: Command \mathversion invalid in math mode on input line 6.
-
-) (./subsections/Preferences/Tensor.tex [4] [5])
-(./subsections/Preferences/Quotient.tex
-Underfull \hbox (badness 10000) in paragraph at lines 11--12
-
- []
-
-
-Overfull \hbox (5.6294pt too wide) in paragraph at lines 18--18
-[] 
- []
-
-)) (./sections/Semiring.tex (./subsections/SemiringAutomata/Intro.tex [6])
-(./subsections/SemiringAutomata/definition/LoS.tex)
-(./subsections/SemiringAutomata/example/Constraint.tex)
-(./subsections/SemiringAutomata/definition/SA.tex)
-(./subsections/SemiringAutomata/example/moveCA.tex (./fig/moveSA.tikz.tex))
-(./subsections/SemiringAutomata/definition/composition.tex
-Overfull \hbox (7.49579pt too wide) in paragraph at lines 2--3
-[]\OT1/cmr/m/it/10 Given two CsA $\OML/cmm/m/it/10 A[] \OT1/cmr/m/n/10 = []$ \O
-T1/cmr/m/it/10 and $\OML/cmm/m/it/10 A[] \OT1/cmr/m/n/10 = []$\OT1/cmr/m/it/10 
-,
- []
-
-) (./subsections/SemiringAutomata/example/Composition.tex [7])) (./document.bbl
-) [8] (./document.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) [2] (./document.aux) ) 
 Here is how much of TeX's memory you used:
- 16540 strings out of 493105
- 333106 string characters out of 6137073
- 381751 words of memory out of 5000000
- 19596 multiletter control sequences out of 15000+600000
- 11978 words of font info for 47 fonts, out of 8000000 for 9000
+ 16376 strings out of 493105
+ 329506 string characters out of 6137073
+ 373743 words of memory out of 5000000
+ 19481 multiletter control sequences out of 15000+600000
+ 7508 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,12n,73p,1271b,912s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on document.pdf (8 pages, 228011 bytes).
+ 57i,5n,66p,441b,277s stack positions out of 5000i,500n,10000p,200000b,80000s
+</u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on document.pdf (2 pages, 66692 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
+ 34 PDF objects out of 1000 (max. 8388607)
+ 24 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
