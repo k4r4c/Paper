@@ -1,0 +1,55 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{stmaryrd}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{courier}
+\usepackage{xspace}
+\usepackage{float}
+
+%\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning,decorations.markings}
+\usepackage{filecontents}
+\usepackage{listings}
+\usepackage{stmaryrd}
+%\usepackage[margin=1in]{geometry}
+%\usepackage{amsthm}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+
+\pagestyle{plain}
+
+%\long\def\/*#1*/{}
+
+\lstdefinestyle{base}{
+	emptylines=1,
+	breaklines=false,
+	basicstyle=\ttfamily\color{black},
+	basicstyle=\footnotesize\ttfamily,
+	moredelim=**[is][\color{red}]{@}{@},
+}

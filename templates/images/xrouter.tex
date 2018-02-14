@@ -1,0 +1,13 @@
+\documentclass[convert]{standalone}
+\usepackage{../tikz-reo}
+\begin{document}
+\begin{tikzpicture}[]
+        \node[reobnode,label=above:$a$]  (a) at (0,0) {};
+        \node[exclrouter,label=above:$b$]  (b) at (1.5,0) {};
+        \node[reobnode,label=above:$c$]  (c) at (3,-1) {};
+        \node[reobnode,label=above:$d$]  (d) at (3,1) {};
+        \draw[sync] (a) to node {} (b);
+        \draw[sync] (b) to node {} (c);
+        \draw[sync] (b) to node {} (d);
+\end{tikzpicture}
+\end{document}

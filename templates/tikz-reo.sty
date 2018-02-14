@@ -1,0 +1,279 @@
+\ProvidesPackage{tikz-reo}
+
+\def\xcolorversion{2.00}
+\def\xkeyvalversion{1.8}
+
+\RequirePackage{ifthen}
+\RequirePackage{pgf}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows,shapes,automata,backgrounds,fit,decorations.markings,decorations.pathmorphing,shapes.symbols,shapes.geometric,calc,topaths,positioning}
+
+% Nodes
+\tikzstyle{reonode}	= [thick, circle, draw=black, fill=black, inner sep=1.25pt]
+\tikzstyle{reobnode}	= [reonode, fill=white]
+\tikzstyle{exclrouter} = [thick, circle, draw=black, path picture={\draw[black] (path picture bounding box.south east) -- (path picture bounding box.north west) (path picture bounding box.south west) -- (path picture bounding box.north east); }]
+
+% IO
+% \tikzstyle{io}	= [thick, rectangle, draw=black, fill=white, inner sep=3.25pt, node distance=0.75cm]
+% \tikzstyle{mixed}	= [reonode, draw=black, fill=black]
+
+% Meta-points to attach stuff to
+\tikzstyle{point}	= [circle, inner sep=0pt, outer sep=0pt, fill=black]
+\tikzstyle{invis}	= [circle, inner sep=1pt, fill=white, draw=white]
+
+% Channels
+
+\newcommand{\channeldata} 	{\ensuremath{\bullet}}
+\newcommand{\channelconstraint}	{\ensuremath{\varsym{R}}}
+\newcommand{\channelfunction}	{\ensuremath{\varsym{f}}}
+\newcommand{\buffername}	{} % {\ensuremath{x}}
+\newcommand{\reo}[1]		{\textsf{#1}}
+
+\tikzstyle{channel}	= [thick, >->, >=stealth, line join=round]
+\tikzstyle{metachan} = [channel, dotted]
+\tikzstyle{sync} = [channel]
+\tikzstyle{lossysync} = [channel, dashed]
+\tikzstyle{bufferfull} = [rectangle, draw, fill=black, transform shape]
+\tikzstyle{bufferempty} = [rectangle, draw, fill=white, transform shape]
+\tikzstyle{fifo} = [fifoempty]
+\tikzstyle{fifofull} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\node[bufferempty, inner sep=2pt, pin={[pin distance=2pt, outer sep=0pt, inner sep=0pt, pin edge={draw=none}]above:$\reo{\buffername}$}]{\scriptsize \color{black} $\enspace \channeldata \enspace$};}}]
+\tikzstyle{fifoempty} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\node[bufferempty, inner sep=2pt, pin={[pin distance=2pt, outer sep=0pt, inner sep=0pt, pin edge={draw=none}]above:$\reo{\buffername}$}]{\scriptsize \color{white} $\enspace \channeldata \enspace$};}}]
+\tikzstyle{fifod} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\node[bufferempty, inner sep=2pt]{\scriptsize $\enspace \channeldata \enspace$};}}]
+\tikzstyle{varempty} = [rectangle, rounded corners, draw=black, fill=white, transform shape]
+\tikzstyle{var} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\node[varempty]{$\quad$};}}]
+\tikzstyle{syncdrain} = [channel, >-<]
+\tikzstyle{asyncdrain} = [channel, >-<, postaction=decorate, decoration={markings, mark=at position 0.5 with {\draw[channel,-] (-2pt,-3pt) -- (-2pt,3pt) [transform shape] (2pt,-3pt) -- (2pt,3pt) [transform shape];}}]
+
+\tikzstyle{forwardimpose} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\draw[channel,-] (-1pt,-4pt) -- (-1pt,4pt) [transform shape] (1pt,-4pt) -- (4pt,0) -- (1pt,4pt) [transform shape];}}]
+\tikzstyle{backwardimpose} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\draw[channel,-] (-1pt,-4pt) -- (-4pt,0) -- (-1pt,4pt) [transform shape] (1pt,-4pt) -- (1pt,4pt) [transform shape];}}]
+\tikzstyle{backwardblock} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\draw[channel,-] (0pt,-4pt) to [bend right=90] (0pt,4pt) [transform shape];}}]
+\tikzstyle{forwardblock} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\draw[channel,-] (0pt,-4pt) to [bend left=90] (0pt,4pt) [transform shape];}}]
+\tikzstyle{prio} = [channel, postaction=decorate, decoration={markings, mark=at position 0.5 with {\node[transform shape]{\raisebox{-.2ex}{!}};}}]
+\tikzstyle{syncspout}	= [channel, <->]
+\tikzstyle{asyncspout}	= [channel, <->, postaction=decorate, decoration={markings, mark=at position 0.5 with {\draw[channel,-] (-2pt,-3pt) -- (-2pt,3pt) [transform shape] (2pt,-3pt) -- (2pt,3pt) [transform shape];}}]
+\tikzstyle{filter}	= [channel, decorate, decoration={zigzag, segment length=4, amplitude=5, post=lineto, pre length=15pt, post length=15pt}, postaction={decorate, decoration={markings, mark=at position 0.5 with {\node[transform shape, inner sep=0pt, pin={[pin distance=5pt, outer sep=0pt, inner sep=0pt, pin edge={draw=none}]right:$\phi$}]{};}}}]
+\tikzstyle{transform}	= [channel, postaction={decorate, decoration={markings, mark=at position 0.5 with {\draw[thick, solid, draw=black, fill=white] (-5pt,-6pt) -- (-5pt,6pt) -- (5pt,0pt) -- cycle;}, mark=at position 0.5 with {\node[inner sep=0pt, pin={[pin distance=6pt, outer sep=0pt, inner sep=0pt, pin edge={draw=none}]above:\channelfunction}]{};}}}]
+
+% Connector box
+\tikzstyle{connector}	= [fill=black!10,rounded corners]
+
+% Colorings
+\newcommand{\noflowleft}{\draw[thick,solid,draw=black,fill=white](-2pt,0pt) -- (2pt,2.5pt) -- (2pt,-2.5pt) -- cycle;}
+\newcommand{\noflowright}{\draw[thick,solid,draw=black,fill=white](-2pt,-2.5pt) -- (-2pt,2.5pt) -- (2pt,0pt) -- cycle;}
+\tikzstyle{flow}	= [thick, thick] 
+\tikzstyle{noflow}	= [thick, dashed]
+\tikzstyle{noflowleft}	= [noflow, postaction=decorate, decoration={markings, mark=at position 0.5 with \noflowleft}]
+\tikzstyle{noflowright}	= [noflow, postaction=decorate, decoration={markings, mark=at position 0.5 with \noflowright}]
+
+% Constraint automata
+\tikzstyle{state}	= [minimum size=.5cm, thick, draw, circle, rounded corners, outer sep=0pt]
+\tikzstyle{initabove}	= [pin={[pin edge={black, thick, <-}]above:}]
+\tikzstyle{initbelow}	= [pin={[pin edge={black, thick, <-}]below:}]
+\tikzstyle{initleft}	= [pin={[pin edge={black, thick, <-}]left:}]
+\tikzstyle{balanceright}= [pin={[pin edge={white, thick, <-}]right:}]
+\tikzstyle{trans}	= [thick, inner sep=2pt]
+\tikzstyle{white}	= [color=white]
+\tikzstyle{translabel}	= [inner sep=1pt, sloped]
+
+
+
+\newif\ifcompiletikz
+
+\newcommand{\tikzoff}{\compiletikzfalse}
+\newcommand{\tikzon}{\compiletikztrue}
+
+\newcommand{\tikznodedist}{1.33cm}
+\newcommand{\tikznodedisthalf}{.75cm}
+\newcommand{\tikznodedistquart}{.375cm}
+
+\tikzon
+
+\newcommand{\tikzconnbin}[3]{%
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline, node distance=\tikznodedist]
+			\node[reobnode,label=below:$\reo{#2}$]	(A) [] {};
+			\node[reobnode,label=below:$\reo{#3}$]	(B) [right of=A] {};
+			
+			\draw[#1]	(A) to node {} (B);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikznode}[1]{%
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline, node distance=\tikznodedist]
+			\node[reonode,label=below:$\reo{#1}$]	(A) [] {};
+		\end{tikzpicture}
+	}
+}
+
+\newcommand{\tikzsync}[2]{\tikzconnbin{sync}{#1}{#2}}
+\newcommand{\tikzlossysync}[2]{\tikzconnbin{lossysync}{#1}{#2}}
+\newcommand{\tikzfifo}[2]{\tikzconnbin{fifo}{#1}{#2}}
+
+\newcommand{\tikzlossyfifo}[3]{%
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline, node distance=\tikznodedist]
+			\node[reobnode,label=below:$\reo{#1}$]	(A) [] {};
+			\ifthenelse{\equal{#2}{}}{%
+				\node[point]	(B) [right of=A] {};
+			}{%
+				\node[reonode,label=below:$\reo{#2}$]	(B) [right of=A] {};
+			}
+			\node[reobnode,label=below:$\reo{#3}$]	(C) [right of=B] {};
+			
+			\ifthenelse{\equal{#2}{}}{%
+				\draw[lossysync,-]	(A) to node {} (B);
+			}{%
+				\draw[lossysync]	(A) to node {} (B);
+			}
+			\draw[fifo]			(B) to node {} (C);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikzbinprimprim}[5]{%
+		\ifcompiletikz{%
+		\begin{tikzpicture}[baseline, node distance=\tikznodedist]
+			\node[reobnode,label=below:$\reo{#3}$]	(A) [] {};
+			\ifthenelse{\equal{#4}{}}{%
+				\node[point]	(B) [right of=A] {};
+			}{%
+				\node[reonode,label=below:$\reo{#4}$]	(B) [right of=A] {};
+			}
+			\node[reobnode,label=below:$\reo{#5}$]	(C) [right of=B] {};
+			
+			\ifthenelse{\equal{#4}{}}{%
+				\draw[#1,-]	(A) to node {} (B);
+			}{%
+				\draw[#1]	(A) to node {} (B);
+			}
+			\draw[#2]			(B) to node {} (C);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikzbinprimprimprim}[7]{%
+		\ifcompiletikz{%
+		\begin{tikzpicture}[baseline, node distance=\tikznodedist]
+		
+			\node[reobnode,label=below:$\reo{#4}$]		(A) [] {};
+			
+			\ifthenelse{\equal{#5}{}}{%
+				\node[point]							(B) [right of=A] {};
+			}{%
+				\node[reonode,label=below:$\reo{#5}$]	(B) [right of=A] {};
+			}
+			
+			\ifthenelse{\equal{#6}{}}{%
+				\node[point]							(C) [right of=B] {};
+			}{%
+				\node[reonode,label=below:$\reo{#6}$]	(C) [right of=B] {};
+			}
+
+			\node[reobnode,label=below:$\reo{#7}$]		(D) [right of=C] {};
+			
+			\ifthenelse{\equal{#5}{}}{%
+				\draw[#1,-]	(A) to node {} (B);
+			}{%
+				\draw[#1]	(A) to node {} (B);
+			}
+			
+			\ifthenelse{\equal{#6}{}}{%
+				\draw[#2,-]	(B) to node {} (C);
+			}{%
+				\draw[#2]	(B) to node {} (C);
+			}
+			
+			\draw[#3]		(C) to node {} (D);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikzfifosync}[3]{\tikzbinprimprim{fifo}{sync}{#1}{#2}{#3}}
+\newcommand{\tikzfifolossysync}[3]{\tikzbinprimprim{fifo}{lossysync}{#1}{#2}{#3}}
+\newcommand{\tikzfifofilter}[3]{\tikzbinprimprim{fifo}{filter}{#1}{#2}{#3}}
+\newcommand{\tikzfifosyncdrain}[3]{\tikzbinprimprim{fifo}{syncdrain}{#1}{#2}{#3}}
+
+\newcommand{\tikzfifosyncsync}[4]{\tikzbinprimprimprim{fifo}{sync}{sync}{#1}{#2}{#3}{#4}}
+\newcommand{\tikzfifosyncsyncdrain}[4]{\tikzbinprimprimprim{fifo}{sync}{syncdrain}{#1}{#2}{#3}{#4}}
+\newcommand{\tikzfifofiltersync}[4]{\tikzbinprimprimprim{fifo}{filter}{sync}{#1}{#2}{#3}{#4}}
+
+
+
+
+
+
+
+
+
+\newcommand{\tikzcasync}[2]{
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline]
+			\node[state, initleft, balanceright] (Q) {};
+			\path[->] (Q) edge [trans, out=120, in=60, loop] node [above] {\scriptsize $\set{\sym{#1} \, \sym{#2}} \, \at{\sym{#1}} \foeq \at{\sym{#2}}$} (Q);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikzcalossysync}[2]{
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline]
+			\node[state, initleft, balanceright] (Q) {};
+			\path[->] (Q) edge [trans, out=120, in=60, loop] node [above] {\scriptsize $\set{\sym{#1} \, \sym{#2}} \, \at{\sym{#1}} \foeq \at{\sym{#2}}$} (Q);
+			\path[->] (Q) edge [trans, out=-60, in=-120, loop] node [below] {\scriptsize $\set{\sym{#1}} \, \fotrue$} (Q);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikzcasynclossysync}[3]{
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline]
+			\node[state, initleft, balanceright] (Q) {};
+			\path[->] (Q) edge [trans, out=120, in=60, loop] node [above] {\scriptsize $\set{\sym{#1} \, \sym{#2} \, \sym{#3}} \, \at{\sym{#1}} \foeq \at{\sym{#2}} \foand \at{\sym{#2}} \foeq \at{\sym{#3}}$} (Q);
+			\path[->] (Q) edge [trans, out=-60, in=-120, loop] node [below] {\scriptsize $\set{\sym{#1} \, \sym{#2}} \, \fotrue$} (Q);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikzcafifo}[3]{
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline]
+			\node[state, initleft]						(Q) {};
+			\node[state, right of=Q, node distance=2cm, balanceright]	(R) {};
+			\path[->] (Q) edge [trans, out=60, in=120] node [above] {\scriptsize $\set{\sym{#1}} \, \at{\sym{#1}} \foeq \sym{#3}$} (R);
+			\path[->] (R) edge [trans, out=-120, in=-60] node [below] {\scriptsize $\set{\sym{#2}} \, \at{\sym{#2}} \foeq \sym{#3}$} (Q);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikzcaalternator}[4]{
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline]
+			\node[state, initleft]						(Q) {};
+			\node[state, right of=Q, node distance=2cm, balanceright]	(R) {};
+			\path[->] (Q) edge [trans, out=60, in=120] node [above] {\scriptsize $\set{\sym{#1} \, \sym{#2} \, \sym{#3}} \, \at{\sym{#1}} \foeq \at{\sym{#3}} \foand \at{\sym{#2}} \foeq \sym{#4}$} (R);
+			\path[->] (R) edge [trans, out=-120, in=-60] node [below] {\scriptsize $\set{\sym{#3}} \, \at{\sym{#3}} \foeq \sym{#4}$} (Q);
+		\end{tikzpicture}
+	} \fi
+}
+
+\newcommand{\tikzcalossyfifo}[4]{
+	\ifcompiletikz{%
+		\begin{tikzpicture}[baseline]
+			\node[state, initleft]						(Q) {};
+			\node[state, right of=Q, node distance=3cm, balanceright]	(R) {};
+			\path[->] (Q) edge [trans, out=150, in=90, loop] node [above] {\scriptsize $\set{\sym{#1}} \, \fotrue$} (Q);
+			
+			\ifthenelse{\equal{#2}{}}{%
+				\path[->] (Q) edge [trans, out=30, in=150] node [above] {\scriptsize $\LINES{\set{\sym{#1}} \, \\ \at{\sym{#1}} \foeq \sym{#4} \foand \sym{#4} \foeq \sym{#4}}$} (R);
+			}{%
+				\path[->] (Q) edge [trans, out=30, in=150] node [above] {\scriptsize $\LINES{\set{\sym{#1} \, \sym{#2}} \, \\ \at{\sym{#1}} \foeq \at{\sym{#2}} \foand \at{\sym{#2}} \foeq \sym{#4}}$} (R);
+			}
+			
+			\path[->] (R) edge [trans, out=90, in=30, loop] node [above] {\scriptsize $\set{\sym{#1}} \, \fotrue$} (R);
+			\path[->] (R) edge [trans, out=-150, in=-30] node [below] {\scriptsize $\set{\sym{#3}} \, \at{\sym{#3}} \foeq \sym{#4} $} (Q);
+			\path[->] (R) edge [trans, out=-90, in=-90] node [below] {\scriptsize $\set{\sym{#1} \, \sym{#3}} \, \at{\sym{#3}} \foeq \sym{#4} $} (Q);
+		\end{tikzpicture}
+	} \fi
+}
