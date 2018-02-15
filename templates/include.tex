@@ -2,7 +2,6 @@
 
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{subfigure}
 \usepackage{mathtools}
 \usepackage{verbatim}
 \usepackage{stmaryrd}
@@ -53,3 +52,10 @@
 	basicstyle=\footnotesize\ttfamily,
 	moredelim=**[is][\color{red}]{@}{@},
 }
+
+\makeatletter
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+\makeatother
+
