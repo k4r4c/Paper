@@ -1,5 +1,21 @@
 \section{Simplification : 2 pages}
-\subsection*{Single state SCA}
-\subsection*{Constraint as Boolean semiring value}
-\subsection*{Semiring automaton}
+Soft constraint automata induce a partial order on assignment map. To this end, each transition involve a tuple composed of a constraint and a c-semiring value. The constraint generate a set of solution, and the c-semiring value a partial order. As a simplification, we reduce soft constraint automata to a single state automata, and define a semiring automata as alternative model to define a partial order on behaviors of open systems. Some optimisation and examples are given as justification.
+
+\paragraph{Single state} The first simplification concerns the state space. To reduce a soft constraint automata to a single state automata, we extend the existing constraint on each transition with a suitable constraint on a memory cell. Intuitively, we encode the state of the automaton as a constraint on memory cell.
+
+\begin{theorem}
+	A soft constraint automaton $A =(Q,C\times E, \rightarrow, q_0)$ can be reduced to a single state soft constraint automaton $A' = (\{q_0\}, C'\times E, \rightarrow', q_0)$ where $C'$ is the following set :
+		$$C' = \bigcup\limits_{q\xrightarrow{c,e}q' \in \rightarrow} \{c \land \underline{s}=q \land \underline{s}'=q'\}$$
+		where $s \in M$ is a fresh variable.
+	
+\end{theorem}
+
+\paragraph{Single transition} Before being able to simplify further the single state soft constraint automaton, we need to introduce a shift of perspective for the soft constraint. Currently, a soft constraint is an element of $C \times E$. We define boolean c-semiring variables and write soft constraint as an element of $\mathbb{B} \otimes_{\mathbb{B}} E$.
+
+\begin{definition} \textbf{Boolean c-semiring variable} is defined as the function $b : C \rightarrow \mathbb{B}$ where $b(\phi) = 1 \Leftrightarrow \exists \gamma D,\gamma \models \phi$, with D the data domain.
+\end{definition}
+	
+
+
+\paragraph{Semiring expression}
 \subsection*{Optimisation and future work}
