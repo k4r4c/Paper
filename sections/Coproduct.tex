@@ -1,6 +1,65 @@
-\section{Coproduct : 2 pages}
-\subsection*{Coproduct definition}
-\subsection*{Uninterpreted expression}
-\subsection*{Runtime composition}
-\subsection*{Quotient}
-\subsection*{Example}
+\section{Coproduct : 3 pages}
+
+For this section, we refer to $E=(E,+_E, \times_E,1,0)$ and $F=(F,+_F, \times_F,1,0 )$ as two c-semirings. 
+We use 0 and 1 as shared element between all c-semiring. Therefore, $\mathbb{B} \subset E \cap F$, where $\mathbb{B}= (\{0,1\}, \times,+,1,0 )$. For convenience, we write $e_i$ [resp. $f_i$] to refer to an element of the csemiring E [resp. F].
+
+\begin{proposition}
+	If $E \cap F \not = \mathbb{B}$, there exists an homomorphism h such that  $h(E) \cap F = \mathbb{B}$
+\end{proposition}
+\begin{proof}
+	Define $h$ on $E$ such that: $$h(e) = \left\{
+	\begin{array}{rl}
+	(0,e) & \text{ if } e \not\in \mathbb{B} \\
+	e \quad & \text{ otherwise }
+	\end{array}
+	\right.$$ The map $h$ is homomorphic to E and $h(E) \cap F = \mathbb{B}$.
+	\qed
+\end{proof}
+For the development of the product between $E$ and $F$, we want to uniquely identify elements from $E$ and $F$ different from elements of $\mathbb{B}$. Following Prop. 1, we can assume $E\cap F = \mathbb{B}$. 
+
+\paragraph{Uninterpreted expression}
+We define the free structure for c-semiring product as a tensor product between $E$ and $F$.
+\begin{definition} The tensor product $E\otimes_{\mathbb{B}}F$ is the tuple $\langle E \otimes_{\mathbb{B}} F, +, \times, 0, 1 \rangle $ where:
+	\begin{list}{-}{}
+		\item $E \subseteq E \otimes_{\mathbb{B}} F$ , $F \subseteq E \otimes_{\mathbb{B}} F$ and $E \otimes_{\mathbb{B}} F$ is closed under $+$ and $\times$.
+		\item + is idempotent, associative and commutative.
+		\item $\times$ is associative and commutative.
+		\item $\times$ distributes over +.
+		\item $\times$ and + are identified on E [resp. F] by $\times_E$ and $+_E$ [resp. $\times_F$ and $+_F$] .
+	\end{list}
+\end{definition}
+
+\paragraph{Canonical form} The tensor product generates all possible terms between two c-semiring $E$ and $F$. Given the properties of $+$ and $\times$, we show a canonical representation of a term in $E\otimes_{\mathbb{B}} F$ as a sum over product terms of $E$ and $F$. 
+
+\begin{lemma}
+	All elements in $g \in E \otimes_{\mathbb{B}} F$ can be written as :
+	$$
+	g = \sum_i (e_i \times f_i)
+	$$
+	where $e_i \in E$ and $f_i \in F$
+\end{lemma}
+\begin{proof}
+	Reasoning by induction on the term of $E \otimes_{\mathbb{B}} F$. For all elements $e\in E$ and $f\in F$, since $1 \in E \cap F$, we have:
+	$$
+	e \times 1 \in E \otimes_{\mathbb{B}} F \quad \text{ and } \quad	1 \times f \in E \otimes_{\mathbb{B}} F
+	$$
+	Suppose $g,h \in E\otimes_{\mathbb{B}} F$, where $g = \sum_i (e_i \times f_i)$ and $h = \sum_j (e_j \times f_j)$ having $e_i,e_j \in E$ and $f_i,f_j \in F$. We look at $g\times h \in E\otimes_{\mathbb{B}} F$ and $g + h \in E\otimes_{\mathbb{B}} F$:
+	$$g \times h = \sum_i (e_i \times f_i) \times \sum_j (e_j \times f_j) = \sum_{i,j} (e_i \times f_i \times e_j \times f_j) = \sum_{i,j} (e_i \times e_j \times f_i \times f_j)$$
+	where	$e_i \times e_j \in E  \text{ and }  f_i \times f_j \in E$,
+	$$ g + h = \sum_i (e_i \times f_i) + \sum_j (e_j \times f_j) = \sum_{k} (e_k \times f_k)$$
+	By induction, all terms of the tensor product $E \otimes_{\mathbb{B}} F$ can be represented as a sum over product of elements in $E$ and $F$. \qed
+\end{proof}
+
+\paragraph{Coproduct} The c-semiring expression in the tensor product is not yet interpreted. We first show that the tensor product $E\otimes_{\mathbb{B}} F$ is the co-product of $E$ and $F$, and then define some projection from the co-product to a product space.
+\begin{theorem}
+	The tensor product $E \otimes_{\mathbb{B}} F$ is the co-product of E and F.
+\end{theorem}
+\begin{proof}
+	We define two injection maps, $\iota_E : E \rightarrow E \otimes_{\mathbb{B}} F, e \mapsto e $ and $\iota_F : F \rightarrow E \otimes_{\mathbb{B}} F, f \mapsto f $. Given a csemiring G and $h_E : E \rightarrow G$ and $h_F : F \rightarrow G$ homomorphism, we want to prove the existence and uniqueness of $h : E \otimes_{\mathbb{B}} F \rightarrow G$ such that $h_E = h \circ \iota_E$ and $h_F = h \circ \iota_F$.
+	
+	We define $h : E \otimes_{\mathbb{B}} F \rightarrow G, \sum_i(e_i \times f_i) \mapsto \sum_i h_E(e_i)\times h_F(f_i)$. The map $h$ is well defined, since all elements of $E \otimes_{\mathbb{B}} F$ can be written as a sum over product of elements of E and F. Moreover, for all element $e\in E$, $h(\iota_E(e))=h_E(e) \times h_F(1) = h_E(e)$ and similarly for elements in F. The corresponding diagram commutes. To prove uniqueness of such map, let's define $h': E \otimes_{\mathbb{B}} F \rightarrow G, \sum_i(e_i \times f_i) \mapsto \sum_i h_E(e_i)\times h_F(f_i)$. Then, for all $i \in E \otimes_{\mathbb{B}} F$, $h'(i) = h(i)$, therefore $h=h'$. \qed
+\end{proof}
+
+\paragraph{Interpretation}
+
+\paragraph{Example}

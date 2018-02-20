@@ -1,5 +1,18 @@
-\section{Streams : 2 pages}
-\subsection*{Relation as stream}
-\subsection*{Equivalence with SCA}
-\subsection*{Composition}
-\subsection*{Counter example}
+\section{Streams : 1-2 pages}
+\paragraph{Soft constraint automata as relation on stream}
+
+\paragraph{Composition} 
+In current literature, the composition of soft constraint automata is only defined on soft constraint automata involving the same c-semiring. In case of two different c-semiring, the composition requires an homomorphism from the component c-semirings to the product c-semiring. Assuming two soft constraint automata $A_1$ and $A_2$ respectively involving two different c-semiring $E_1$ and $E_2$, the composition used in \cite{?} defined two homomorphisms $h_1 : E_1 \rightarrow E$ and $h_2 : E_2 \rightarrow E$ where $E$ is a product c-semiring. Moreover, we need the composition of c-semiring to define a new c-semiring so that our composition is well defined. Thus, as explained in \cite{?}, to preserve c-semiring properties after composition, the carrier of the c-semiring should be restricted to its cancellative elements. Note that any c-semiring with $\times$ idempotent are non-cancellative (all elements are non-cancellative).
+\begin{definition}
+	\textbf{Composition} of two soft constraint automata $A_1=(Q_1,\rightarrow_1, C_1 \times E, q_{01})$ and $A_2=(Q_2,\rightarrow_2, C_2\times E, q_{02})$ is defined as the product $ A_1 \times A_2 = (Q, \rightarrow, C\times E, (q_{01},q_{02}) )$ where : 
+	\begin{list}{-}{ }
+		\item $Q= Q_1 \times Q_2 $ is a set of state and $(q_{01},q_{02})\in$ Q is the initial state.
+		\item The transition relation $\rightarrow$ is the smallest relation satisfying
+		$$
+		\frac{q \xrightarrow{\phi_1,e_1} q' \in \rightarrow _1 \quad , \quad p\xrightarrow{\phi_2,e_2}p' \in \rightarrow_2}{(q,p) \xrightarrow{\phi_1 \land \phi_2,e_1 \times e_2}(q',p') \in \rightarrow}
+		$$
+		%A transition is denoted by $\left\langle q_i, c, s, p_i \right\rangle \in \rightarrow$
+	\end{list}
+\end{definition}
+\paragraph{Counter examples}
+We argue that it is not necessary to explicitly give a definition of the homomorphic function to the c-semiring product during composition. Furthermore, delaying the definition of the product space and the injection function allows the definition of more complex products such as runtime and non-cancellative c-semiring composition.
