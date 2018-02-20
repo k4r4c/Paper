@@ -5,17 +5,59 @@ Soft constraint automata induce a partial order on assignment map. To this end, 
 
 \begin{theorem}
 	A soft constraint automaton $A =(Q,C\times E, \rightarrow, q_0)$ can be reduced to a single state soft constraint automaton $A' = (\{q_0\}, C'\times E, \rightarrow', q_0)$ where $C'$ is the following set :
-		$$C' = \bigcup\limits_{q\xrightarrow{c,e}q' \in \rightarrow} \{c \land \underline{s}=q \land \underline{s}'=q'\}$$
+		$$C' = \bigcup\limits_{q\xrightarrow{\phi,e}q' \in \rightarrow} \{\phi \land \underline{s}=q \land \underline{s}'=q'\}$$
 		where $s \in M$ is a fresh variable.
-	
 \end{theorem}
 
-\paragraph{Single transition} Before being able to simplify further the single state soft constraint automaton, we need to introduce a shift of perspective for the soft constraint. Currently, a soft constraint is an element of $C \times E$. We define boolean c-semiring variables and write soft constraint as an element of $\mathbb{B} \otimes_{\mathbb{B}} E$.
+\paragraph{Semiring automaton} 
+%Before being able to simplify further the single state soft constraint automaton, we need to introduce a shift of perspective for the soft constraint. 
+Currently, a soft constraint is an element of $C \times E$. We define boolean c-semiring variables and write soft constraint as an element of $\mathbb{B} \otimes_{\mathbb{B}} E$.
 
-\begin{definition} \textbf{Boolean c-semiring variable} is defined as the function $b : C \rightarrow \mathbb{B}$ where $b(\phi) = 1 \Leftrightarrow \exists \gamma D,\gamma \models \phi$, with D the data domain.
+\begin{definition} \textbf{Boolean c-semiring function} is defined as a function $b : C \times \Delta \rightarrow \mathbb{B}$ where $$b(\phi,\gamma) = \begin{cases}
+	1 &if \quad D,\gamma \models \phi  \\ 
+	0 &if \quad D,\gamma \not\models \phi 
+\end{cases}$$
+	with D the data domain, and $\Delta$ a set of assignments $\gamma : V_{\phi} \rightarrow D$.
 \end{definition}
-	
 
+We give a c-semiring interpretation of a c-semiring formula.
+Referring to section 2 and the definition of constraint as formula, we now extend the logic with c-semiring values. 
+\begin{definition}
+	We define the interpretation function $\llbracket\cdot\rrbracket$ of a constraint $\phi$ to a boolean c-semiring, such that:
+	\begin{align*}
+		\llbracket \bot  \rrbracket &= 0  &\llbracket \phi_1 \land \phi_2 \rrbracket = \llbracket \phi_1 \rrbracket \times \llbracket \phi_2 \rrbracket \qquad \\
+		\llbracket \phi_1 \lor \phi_2 \rrbracket &= \llbracket \phi_1 \rrbracket + \llbracket \phi_2 \rrbracket 	&\llbracket \neg \phi \rrbracket = 
+		\begin{cases}
+		1 &if \quad \llbracket \phi \rrbracket=0  \\ 
+		0 &if \quad \llbracket \phi \rrbracket=1
+		\end{cases}
+		\qquad  \\
+		&\textit{A relation R of arity n is interpreted as }\llbracket R \rrbracket : D^n \rightarrow \mathbb{B}.
+	\end{align*}
+\end{definition}
+
+\begin{definition} An \textbf{interpretation} of a c-semiring formula $\phi$ is given by $\llbracket\cdot\rrbracket : C \rightarrow E $
+\end{definition}
+
+We now give a new definition of $\Gamma_{\phi}$, the set of satisfying solutions to the constraint $\phi$. We note $$\Gamma_{\phi} = \{\gamma \mid b(\phi,\gamma)=1\}$$
+
+A soft constraint $(\phi,e) \in C \times E$ is now a semiring value $b(\phi,\gamma) \times e \in \mathbb{B}\otimes_{\mathbb{B}}E$ since, from section 3, we showed that $\mathbb{B} \subseteq E$, thus $ \mathbb{B}\otimes_{\mathbb{B}}E = E$. In other words, the function $b(\phi,\gamma)$ is $1 \in E$ if $D,\gamma \models \phi$ and $0 \in E$ otherwise. We extend the notion of boolean c-semiring functions to any kind of c-semiring functions. We define the c-semiring function $c : C \times \Delta \rightarrow E$ and given a soft constraint $(\phi,e) \in C\times E$, we can write the following expression $c(\phi,\gamma) \times e \in E$.
+
+\begin{definition}
+	A semiring automaton is a tuple $(Q,\rightarrow,E, q_0)$ where:
+	\begin{list}{-}{ }
+		\item $Q$ is a set of states, and $q_0\in Q$ is the initial state.
+		\item $E$ is a c-semiring.
+		\item .
+	\end{list} 
+\end{definition}
+
+\begin{theorem}
+	A soft constraint automaton $A =(Q,C\times E, \rightarrow, q_0)$ can be reduced to a semiring automaton $A' = (\{q_0\}, C'\times E, \rightarrow', q_0)$ where $C'$ is the following set :
+	$$C' = \bigcup\limits_{q\xrightarrow{\phi,e}q' \in \rightarrow} \{\phi \land \underline{s}=q \land \underline{s}'=q'\}$$
+	where $s \in M$ is a fresh variable.
+	
+\end{theorem}
 
 \paragraph{Semiring expression}
 \subsection*{Optimisation and future work}
