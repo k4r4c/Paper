@@ -3,8 +3,8 @@
 %\subsection*{Components}
 
 We model autonomous systems as compositions of primitive components.
-We superficially regard two kinds of components: rational components and irrational components.
-Intuitively, only the behavior of the former can be finitely represented; the latter not.
+Superficially, we recognize two kinds of components: rational components and irrational components.
+Intuitively, only the behavior of the former can be finitely represented; that of the latter not.
 Components cannot recognize themselves or others as being rational or irrational.
 We use irrational components as primitives to model unpredictable environments.
 
@@ -13,44 +13,46 @@ We use irrational components as primitives to model unpredictable environments.
 Each component has a fixed number of ports.
 A port can be thought of as a gateway, passing data in and out.
 Components without ports are sealed and can no longer be composed.
-Semantically, we define behavior of a component as a (non-well-founded) relation between ports.
-Only rational components harbor a finite representation of its behavior.
-See figure \ref{fig:Components} for a picture.
+Semantically, we define the behavior of a component as a (non-well-founded) relation among its ports.
+Only rational components harbor finite representations of their behavior.
+See figure \ref{fig:Components}.
 \begin{figure}[t]
 \begin{centering}
 \subfloat[\label{fig:Components}Components]{\includegraphics[scale=0.6]{pic/black-white-components}}$\qquad$\subfloat[\label{fig:Channels}Channels]{\includegraphics[scale=0.6]{pic/ports-channels}}$\qquad$\subfloat[\label{fig:Node}Node]{\includegraphics[scale=0.6]{pic/nodes}
 
 }
 \par\end{centering}
-\caption{A black box is an irrational component; a white box is a rational
-component. Channels are pictured by different edge styles. Nodes are
-depicted by black dots, merging
-incoming ports $a_1...a_n$ and replicating to outgoing ports $b_1...b_m$.}
+\caption{
+	A black box depicts an irrational component;
+	a white box depicts a rational component.
+	Channels are pictured by different edge styles.
+	Nodes are depicted by black dots, merging incoming ports $a_1,...,a_n$ and replicating to outgoing ports $b_1,...,b_m$.}
 \end{figure}
 
 Studying ports is important.
-One could stand\textemdash quite literally\textemdash next to a port and observe all data that is passed along.
+One may stand\textemdash quite literally\textemdash next to a port and observe all data that it passes along.
 Sometimes one observes no activity at all, which we denote by $*$.
-Other times one observes a datum, which we leave uninterpreted.
-Ports are characterized by the set of streams of its activity.
-For example, we write $a=(*,d_{1},*,*,d_{2},\ldots)$ where $d_{1}$ is the first datum observed and $d_{2}$ is the second datum observed, and so on.
+Other times one observes a datum exchanged through the port, which we leave uninterpreted.
+A port is characterized by the set of streams of its activity.
 
-This work is based on Reo: a language for modeling agents as components.
+For example, let $a$ be a port. We write $(*,d_{1},*,*,d_{2},\ldots)\in a$, where $d_{1}$ is the first datum observed, $d_{2}$ is the second datum observed, and so on.
+
+This work is based on Reo: a language of concurrent protocols and components.
 The most important elements of this language are channels, nodes and compositions.
-Channels and nodes are primitive components through which data \emph{flows} between ports.
-We will later give two examples of the channels in figure \ref{fig:Channels}.
+Channels and nodes are primitive components through whose ports data \emph{flows}.
+We will later explain two examples of the channels that appear in figure \ref{fig:Channels}.
 Nodes are used to link multiple channels together, see figure \ref{fig:Node}.
 Finally, composition identifies the ports in complex constructions of channels and nodes.
 
 \paragraph{Protocols}
 
-We introduce protocols as a fundamental formalism for modeling systems.
+We introduce protocol as a fundamental concept for modeling systems.
 Formal protocols are a generalization of formal languages,
-in the sense that formal languages defines word membership,
-and that formal protocols defines stream membership.
-We now give some more details.
+in the sense that formal languages define word membership,
+whereas formal protocols define stream membership.
 
-By $\Sigma$ we denote some countably infinite alphabet of symbols.
+By $\Sigma$ we denote an arbitrary countable set of symbols.
+Let $\mathbb{N}$ be the set of natural numbers ${0,1,2,\ldots}$
 A finite sequence, or \emph{word}, is formed by juxtaposing symbols from $\Sigma$.
 The set of all words is denoted $\Sigma^{*}$.
 A formal language $\mathcal{L}$ is a subset of the set of all words,
@@ -58,71 +60,100 @@ i.e. $\mathcal{L}\subseteq\Sigma^{*}$.
 
 An infinite sequence, or \emph{stream}, is formed by an infinite juxtaposing of symbols from $\Sigma$.
 The set of all streams is denoted $\Sigma^{\omega}$.
-A stream is isomorphic to a function $\sigma:\mathbb{N}\to\Sigma$,
-and a $\sigma$ can be given by defining $\sigma(0)$ and the \emph{stream derivative} $\sigma'$.
-Streams are informally described as infinite tuples,
-in the shape $(x_{0},x_{1},x_{2},\ldots)$ where $x_i$ are elements of $\Sigma$.
-A formal protocol $\mathcal{P}$ is a subset of the set of all streams,
-i.e. $\mathcal{P}\subseteq\Sigma^{\omega}$.
+Streams are informally described as infinite tuples
+of the shape $(x_{0},x_{1},x_{2},\ldots)$, where each $x_i \in \Sigma$.
+A stream is isomorphic to a function $\sigma:\mathbb{N}\to\Sigma$;
+a stream $\sigma = (\sigma(0),\sigma(1),\sigma(2),\ldots)$ has
+an \emph{initial value} $\sigma(0)$,
+and a \emph{stream derivative} $\sigma' = (\sigma(1),\sigma(2),\ldots)$,
+and can be specified by differential stream equations \cite{?}.
+
+In this formal treatment, we have considered $\Sigma$ to be any set.
+This set could be structured and typed,
+and we assume it is closed under pairs of Cartesian product type.
+We will now consider streams in a more applied setting, by considering data.
+Let $D$ denote a set of data that contains some special fixed constant $*\in D$.
+Although we leave $D$ uninterpreted,
+it is possibly structured in an application-specific way.
+
+By $D^{\omega}$ we mean the set of streams of observations,
+and $\sigma\in D^\omega$ is called a \emph{data stream}.
+We will build more complex constructions out of data streams;
+$(\sigma_1,\sigma_2)\in D^\omega\times D^\omega$ is a pair of data streams,
+and $(D\times D)^\omega$ is the set of streams of pairs of data elements.
+We can generalize this construction;
+$(\sigma_1,\ldots,\sigma_n)\in(D^\omega)^n$ is an $n$-tuple of data streams,
+and $(D^n)^\omega$ is the set of streams of $n$-tuples of data elements.
 
 
-\paragraph{Ports} Let $V$ denote a countably infinite set of port variables,
-and let $D$ denote a set of data that contains some fixed constant $*\in D$.
-The meaning of each datum $d\in D$ other than $*$ is application-specific.
-By $D^{\omega}$ we mean a single stream of observations, called a \emph{data stream}.
-Next, we consider a rational component $C$.
-Let $V_{C}$ denote the finite set of port variables corresponding to $C$.
-If $V_{C}$ is empty then the component is sealed.
-Let $n=|V_{C}|$ be the number of ports of $C$.
-
+\paragraph{Ports}
 We characterize the behavior of a rational component by a relation on data streams.
-An $n$-ary relation $R$ on data streams can be seen as a set of tuples of data streams,
-e.g. $(\sigma_{1},\sigma_{2},\ldots,\sigma_{n})\in R$.
-We obtain the sets of data streams by projection:
-we define $\sigma_i\in\Pi_i R$ if and only if $(\sigma_{1},\ldots,\sigma_i,\ldots,\sigma_{n})\in R$.
-Equivalently, and more convenient for our purposes,
-let $R$ be sets of streams of $n$-ary tuples of data.
-That is, we let $R$ be a formal protocol with alphabet $\Sigma=D^{n}$.
+Consider that $n$-ary relations are \emph{sets} of $n$-tuples of data streams, i.e. $R\subseteq (D^\omega)^n$.
+Let $(\sigma_{1},\ldots,\sigma_{n})\in R$.
+Let $\pi_i(\sigma_{1},\ldots,\sigma_{i},\ldots,\sigma_{n})=\sigma_{i}$ denote tuple projection.
+We define relation projection $\Pi_i R$ such that $\sigma_i\in\Pi_i R$ if and only if $(\sigma_{1},\ldots,\sigma_i,\ldots,\sigma_{n})\in R$ where $1\leq i\leq n$.
 
-Intuitively, one can compare our treatment to relational algebra,
-where the attribute names of $n$-ary relations are our port variables.
-By convention we identify a rational component $C$ and the relation specifying its behavior.
-The ports $V_C$ are attributes of the $|V_C|$-ary relation.
-We now characterize a port $v\in V_C$ by the set of data streams $\Pi_v C$.
+Intuitively, one can compare our treatment to relational algebra.
+In relational algebra, each element of a tuple is named by an attribute name.
+By convention, we will consider a rational component $R$ and the relation specifying its behavior
+to be the same.
+Let $P$ denote a countably infinite set of port variables, and let $P_R$ be the port variables
+used as attribute names in relation $R$. We characterize a port $v\in P_R$ by the set of data streams $\Pi_v R$.
+
+Equivalent up to isomorphism, and more convenient for our purposes,
+let the $n$-ary relation $R$ be sets of streams of $n$-ary tuples of data,
+that is, $R\subseteq (D^n)^\omega$.
+
+\begin{table}[b]
+	\begin{center}
+		\includegraphics[scale=0.8]{pic/stream-table}
+	\end{center}
+	\caption{
+		\label{fig:Stream-Table}Left-most table shows stream notation. Other tables are example observations that are in $S(a,b)$.  Each columns is a data stream, associated to a port variable: we have that $\Pi_a S=\sigma_1$ and $\Pi_b=\sigma_2$. Each table specifies a pair of streams, or a stream of pairs (and these are equivalent up to some isomorphism.)}
+\end{table}
+
+We illustrate these concepts more concretely in Table \ref{fig:Stream-Table}.
+Note that such a table only illustrates a \emph{single} stream of data tuples as its rows.
 
 \paragraph{Channels} We consider two channels: synchronous and asynchronous,
-as depicted in figure \ref{fig:Channels} respectively on top and bottom.
-Let $a$ and $b$ be two ports.
-We specify the behavior of a synchronous channel between $a$ and $b$, denoted $S(a,b)\subseteq(D^2)^{\omega}$, as the largest relation such that:
+as depicted in figure \ref{fig:Channels} respectively at the top and the bottom.
+We specify the behavior of a synchronous channel between ports $a$ and $b$, denoted $S(a,b)\subseteq(D^2)^{\omega}$, as the largest relation such that:
 $$\sigma\in S(a,b)\Leftrightarrow\left[\forall d\in D.\,\sigma(0)=(d,d)\right]\land\sigma'\in S(a,b)$$
-that is, the two ports have equal data streams. We now specify the behavior of an asynchronous channel,
-denoted $A(a,b)\subseteq(D^2)^{\omega}$, as the largest relation:
+that is, the two ports have equal data streams.
+
+We now specify the behavior of an asynchronous channel, of which two examples are shown
+in Table \ref{fig:Stream-Table}. An synchronous channel between ports $a$ and $b$ is denoted $A(a,b)\subseteq(D^2)^{\omega}$,
+as the largest relation:
 \begin{align*}
 	\sigma\in A(a,b)\Leftrightarrow\forall d\in D.\, & \sigma(0)=(d,*)\,\land\\
 	& \exists i.\,\sigma(i)=(*,d)\land\left[\forall j<i.\,\sigma(j)=(*,*)\right]\,\land\\
 	& \phantom{\exists i.\,}\sigma^{(i+1)}\in A(a,b)
 \end{align*}
-where $\sigma^{(0)}=\sigma$ and $\sigma^{(n+1)}=\left(\sigma^{(n)}\right)'$ defines the repeated stream derivative.
+for non-zero $j$, and the repeated stream derivative: $\sigma^{(n+1)}=\left(\sigma^{(n)}\right)'$; $\sigma^{(0)}=\sigma$.
+
 Intuitively, an asynchronous channel is either inactive or passes a datum in a delayed fashion.
 Let $i=0$ and see $\sigma(0)=(*,*)$.
 If port $a$ offers a datum $d$ then port $b$  takes the same datum at some time later,
 while both ports remain inactive in the mean time. Note that when $a$ and $b$ are also
 connected by a synchronous channel, the behavior collapses into the singleton set accepting only $(*,*,\ldots)$.
 
+In essence there is no difference in the sensing of a port as \emph{input} or \emph{output}.
+We only provide such designation, to aid the informal description for an intuitive operational understanding.
+We assume that, practically, it is agreed upon upfront how the protocol designates port sensing.
+
 \paragraph{Nodes}
 
 Finally, we specify the node as depicted in \ref{fig:Node}.
 Nodes have $n+m$ number of ports with $n,m\geq1$.
-Its input ports are denoted $a^{\rightarrow}=a_1,\ldots,a_n$ and output ports $b^{\rightarrow}=b_1,\ldots,b_m$.
-Note that by $\sigma(0)_i$ we denote the $i$-th projection of the initial element of
-the stream $\sigma$ containing tuples $(a_1,\ldots,a_n,b_1,\ldots,b_m)$.
-The behavior of nodes are characterized by the $(n+m)$-ary relation $N(a^{\rightarrow},b^{\rightarrow})$,
+Its ports are denoted $a_1,\ldots,a_n$ and $b_1,\ldots,b_m$.
+Recall that $\pi_i$ is tuple projection.
+The behavior of nodes are characterized by the $(n+m)$-ary relation $N(a_1,\ldots,a_n,b_1,\ldots,b_n)$,
 defined as the largest relation such that:
 \begin{align*}
-	\sigma\in N(a^{\rightarrow},b^{\rightarrow})\Leftrightarrow\, & \forall d\in D.\,
-	\bigl[\exists i\leq n.\,\sigma(0)_i = d\land\left[\forall i'\leq n.\,i'\neq i\rightarrow\sigma(0)_{i'} = *\right]\\
-	& \phantom{\forall d\in D.\, \bigl[}\forall j\leq m.\,\sigma(0)_{n+j}=d\bigr]\,\land\\
-	& \sigma'\in N(a^{\rightarrow},b^{\rightarrow})
+	\sigma\in N(\ldots)\Leftrightarrow\, & \forall d\in D.\,
+	\bigl[\exists i\leq n.\,\pi_i\sigma(0) = d\land\left[\forall i'\leq n.\,i'\neq i\rightarrow\pi_{i'}\sigma(0) = *\right]\\
+	& \phantom{\forall d\in D.\, \bigl[}\forall j\leq m.\,\pi_{n+j}\sigma(0)=d\bigr]\,\land\\
+	& \sigma'\in N(\ldots)
 \end{align*}
 where $i,i',j$ are non-zero.
 Intuitively, nodes are synchronous channels that merge and replicate data.
@@ -130,6 +161,3 @@ Merge specifies that at most one of the $n$ channels can offer a datum,
 and all others $n$ channels are inactive.
 Replication specifies that all of the $m$ channels takes the datum offered.
 Also, all ports of a node can be inactive.
-
-
-\vfill
