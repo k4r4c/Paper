@@ -1,0 +1,17 @@
+ \begin{tikzpicture}[>=latex,shorten >=1pt,node distance=3cm,on grid,auto, node/.style={circle,draw,minimum size=25pt}, ]
+
+ \node[state] (qW) at (-40pt,0pt) {$q_W$};
+ \node[state, right = of qW] (qN) {$q_N$};
+ \node[state, below = of qW] (qS) {$q_S$};
+ \node[state, right = of qS] (qE) {$q_E$};
+ \draw[<-,text=white] (qW) -- node[] {} ++(0,1);
+ \draw[->] (qN) to[out=160,in=20] node[above] {west , 2} (qW);
+ \draw[->] (qS) to[out=-20,in=200] node[below] {east , 2} (qE);
+ \draw[->] (qW) to[out=-110,in=110] node[left] {south , 2} (qS);
+ \draw[->] (qE) to[out= 80,in=-80] node[right] {north, 2} (qN);
+ \draw[->] (qN) to[out=20,in=-20,looseness=8] node[right, align=left] {east , 3\\south , 3 \\ north, 3} (qN);
+ \draw[->] (qE) to[out=20,in=-20,looseness=8] node[right, align=left] {east , 3\\south , 3 \\ west, 3} (qE);
+ \draw[->] (qW) to[out=160,in=-160,looseness=8] node[left, align=left] {west , 
+ 3 \\ east, 3 \\ north, 3} (qW);
+ \draw[->] (qS) to[out=160,in=-160,looseness=8] node[left, align=left] {west , 3\\ south , 3 \\ north, 3} (qS);
+ \end{tikzpicture}

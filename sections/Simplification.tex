@@ -25,14 +25,15 @@ Referring to section 2 and the definition of constraint as formula, we now exten
 \begin{definition}
 	We define the interpretation function $\llbracket\cdot\rrbracket$ of a constraint $\phi$ to a boolean c-semiring, such that:
 	\begin{align*}
-		\llbracket \bot  \rrbracket &= 0  &\llbracket \phi_1 \land \phi_2 \rrbracket = \llbracket \phi_1 \rrbracket \times \llbracket \phi_2 \rrbracket \qquad \\
-		\llbracket \phi_1 \lor \phi_2 \rrbracket &= \llbracket \phi_1 \rrbracket + \llbracket \phi_2 \rrbracket 	&\llbracket \neg \phi \rrbracket = 
+		&\llbracket \bot  \rrbracket = 0  \\
+		&\llbracket \phi_1 \land \phi_2 \rrbracket = \llbracket \phi_1 \rrbracket \times \llbracket \phi_2 \rrbracket  \\
+		&\llbracket \phi_1 \lor \phi_2 \rrbracket = \llbracket \phi_1 \rrbracket + \llbracket \phi_2 \rrbracket 	\\
+		&\llbracket \neg \phi \rrbracket = 
 		\begin{cases}
 		1 &if \quad \llbracket \phi \rrbracket=0  \\ 
 		0 &if \quad \llbracket \phi \rrbracket=1
-		\end{cases}
-		\qquad  \\
-		&\textit{A relation R of arity n is interpreted as }\llbracket R \rrbracket : D^n \rightarrow \mathbb{B}.
+		\end{cases}\\
+		&\textit{A relation R of arity n is interpreted as }\llbracket R \rrbracket : D^n \rightarrow \mathbb{B}. 
 	\end{align*}
 \end{definition}
 
