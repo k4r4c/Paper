@@ -58,7 +58,7 @@ whereas formal protocols define stream membership.
 We will limit ourselves to $\omega$-regular protocols.
 
 Let $\mathbb{N}$ be the set of natural numbers.
-Let $D$ denote a countable set of data elements.
+Let $D$ denote a set of data elements.
 We leave $D$ uninterpreted, although it is possibly structured in an application-specific way.
 We let $\Sigma$ be our alphabet, defined such that $D\subseteq\Sigma$ and $*\in\Sigma$.
 We explicitly mention that $*\not\in D$. We often consider constructions
@@ -102,8 +102,9 @@ to be the same, often denoted by $R$.
 Intuitively, one can compare our treatment to relational algebra.
 In relational algebra, each element of a tuple is named by an attribute name.
 
-Let $P$ denote a countably infinite set of port variables, and let $P_R$ be the port variables
-used as attribute names in relation $R$. We characterize a port $v\in P_R$ by the set of data streams $\Pi_v R$, by abusing notation of $\Pi$.
+Let $P$ denote a countably infinite set of port variables.
+Let $P_R$ be the port variables of component $R$.
+We use $P_R$ as attribute names of the relation $R$: for $P_R=\{a,b,\ldots\}$, we often write $R(a,b,\ldots)$. We characterize a port $v\in P_R$ by the set of data streams $\Pi_v R$, by abusing notation of $\Pi$.
 
 Equivalent up to isomorphism, and more convenient for our purposes,
 let the $n$-ary relation $R$ be sets of streams of $n$-ary tuples of data,
@@ -122,6 +123,8 @@ Note that such a table only illustrates a \emph{single} stream of $n$-tuples as 
 In summary, a component is characterized by a \emph{set} of acceptable tables,
 and its port are characterized by the (set of) columns of such tables.
 
+\vspace{-5pt}
+
 \paragraph{Channels} We consider two channels: synchronous and asynchronous,
 as depicted in figure \ref{fig:Channels} respectively at the top and the bottom.
 We specify the behavior of a synchronous channel between ports $a$ and $b$, denoted $S(a,b)\subseteq(\Sigma\times\Sigma)^{\omega}$, as the largest relation such that:
@@ -129,10 +132,10 @@ $$\sigma\in S(a,b)\Leftrightarrow\left[\exists d\in \Sigma.\,\sigma(0)=(d,d)\rig
 that is, the two ports have equal data streams.
 
 We now specify the behavior of an asynchronous channel, of which two examples are shown
-in Table \ref{fig:Stream-Table}. An synchronous channel between ports $a$ and $b$ is denoted $A(a,b)\subseteq(\Sigma\times\Sigma)^{\omega}$,
+in Table \ref{fig:Stream-Table}. An asynchronous channel between ports $a$ and $b$ is denoted $A(a,b)\subseteq(\Sigma\times\Sigma)^{\omega}$,
 as the largest relation:
 \begin{align*}
-	\sigma\in A(a,b)\Leftrightarrow\exists d\in D.\, & \sigma(0)=(d,*)\,\land\\
+	\sigma\in A(a,b)\Leftrightarrow\exists d\in \Sigma.\, & \sigma(0)=(d,*)\,\land\\
 	& \exists i.\,\sigma(i)=(*,d)\land\left[\forall j<i.\,\sigma(j)=(*,*)\right]\,\land\\
 	& \phantom{\exists i.\,}\sigma^{(i+1)}\in A(a,b)
 \end{align*}
@@ -140,7 +143,7 @@ for non-zero $j$, and the repeated stream derivative: $\sigma^{(n+1)}=\left(\sig
 
 Intuitively, an asynchronous channel is either inactive or passes a datum in a delayed fashion.
 Let $i=0$ and see that $\sigma(0)=(*,*)$.
-If port $a$ offers a datum $d$ then port $b$  takes the same datum at some time later,
+If port $a$ offers a datum then port $b$  takes the same datum at some time later,
 while both ports remain inactive in the mean time. Note that when $a$ and $b$ are also
 connected by a synchronous channel, the behavior collapses into the singleton set accepting only $(*,*,\ldots)$: this is explained in section \ref{sec:Streams}.
 

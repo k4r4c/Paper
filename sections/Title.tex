@@ -38,3 +38,26 @@
 %	Constraint automata have an logical interpretation that reduces state transition explosion.
 %	Soft constraint automata, logic with csemiring, decoupling product from quotient, new composition operator.
 \end{abstract}
+
+
+In cyber-physical systems, one main objective is to cope with unpredictable environments of agents.
+We model agents and their immediate observable environment as being an autonomous system.
+Cyber-physical systems and autonomous systems are instances of \emph{open distributed systems}.
+The techniques we present in this paper are applicable in general.
+We focus our running example on a cyber-physical application to animate the mind of the reader.
+
+To set the stage, let us consider an example scenario of mobile agents.
+An agent is a device with communication mechanisms,
+and other sensing and acting peripherals,
+that has an unpredictable environment:
+the agent's immediate environment can change by the entering or leaving of other nearby agents,
+and in general, sensors measure changes of the environment as induced by external stimuli.
+Agents may act in their environment\textemdash for example,
+moving around by driving motors or by other propulsion.
+The resulting behavior leads in turn to a change in environment.
+
+The open-endedness of agents' environments poses a challenge:
+we cannot \emph{a priori} know all possible configurations of an autonomous system,
+since each configuration can lead to a potentially infinite number of possible behaviors.
+How do we design and implement agents that still have reasonably acceptable behavior
+in such unpredictable environments?
